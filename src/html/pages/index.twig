@@ -1,0 +1,30 @@
+{% set page_modifier = 'page--home' %}
+
+{% extends "layouts/_site.twig" %}
+
+{% block main %}
+
+	<div data-js="content" class="content">
+		
+		{% for page in pages %}
+			<section class="section">
+				{% for section in page.attributes.sections %}
+					{% embed "components/_section.twig" with {"content": section.attributes, "modifiers": "", "index": 0, "id": "" }  %}
+					{% endembed %}
+				{% endfor %}
+			</section>
+		{% endfor %}
+	
+	</div>
+
+{% endblock %}
+
+{# Somehow placing this block above the main block does not work? Weird.. #}
+{% block header %}
+	{% include "components/_moodboard.twig" with {"pages": pages} %}
+
+	<div data-js="scroll-trigger" class="header__scroll-button">
+		Scroll
+	</div>
+
+{% endblock %}

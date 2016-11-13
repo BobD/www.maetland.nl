@@ -1,0 +1,11 @@
+{
+    "navigation": {
+        "site": [
+            {"label": "About", "url": ""},
+            {"label": "Contact", "url": ""}
+        ],
+
+        "projects": [
+        ]
+    }
+}   

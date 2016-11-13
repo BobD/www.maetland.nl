@@ -1,0 +1,31 @@
+.section{
+	margin-bottom: 2em;
+}
+
+.section__header,
+.section__content{
+
+}
+
+.section__header{
+	background-color: var(--color-black);
+	color: white;
+	padding: .5em 1em;
+	text-align: center;
+	user-select: none;
+	cursor: pointer;
+}
+
+.section__content{
+	max-height: 10em;
+	overflow: hidden;
+	transition: max-height ease .5s;
+}
+
+.section{
+	&.closed{
+		& .section__content{
+			max-height: 0;
+		}
+	}	
+}

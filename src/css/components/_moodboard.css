@@ -1,0 +1,76 @@
+.moodboard{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.moodboard__header,
+.moodboard__info{
+	height: 100%;
+	width: 12em;
+	position: absolute;
+	left: var(--hero-offet-left);
+	background: black;
+	z-index: 1;
+}
+
+.moodboard__header{
+}
+
+.moodboard__info{
+	z-index: 2;
+	/*width: 100%;*/
+	background: transparent;
+	color: white;
+	pointer-events: none;
+	text-align: center;
+}
+
+.moodboard__info-list{
+	white-space: nowrap;
+	position: relative;
+	top: 50%;
+}
+
+.moodboard__info-item{
+	display: inline-block;
+	width: 100%;
+	text-transform: uppercase;
+	font-size: var(--ms0);
+	opacity: 0;
+	transition: opacity ease .5s;
+
+	&.show{
+		opacity: 1;
+	}
+}
+
+.moodboard__list{
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+.moodboard__item{
+	height: 100%;
+	width: 100%;
+	float: left;
+	color: white;
+	outline: 0;
+
+	position: relative;
+	left:  var(--hero-offet-left);
+}
+
+
+/* Slick overides */
+
+.slick-list{
+	height: 100%;
+}
+
+.slick-track{
+	height: 100%;
+}

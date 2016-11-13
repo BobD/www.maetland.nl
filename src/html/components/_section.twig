@@ -1,0 +1,18 @@
+{% set sectionIndex = (index + 1) |default(1) %}
+{% set sectionId = id %}
+
+<section data-js="content-section" class="section">
+	
+	<header class="section__header">
+		<h{{sectionIndex}}>
+			{{content.title}}
+		</h{{sectionIndex}}>
+	</header>
+
+	<div class="section__content">
+        {% block content %}
+        	{{content.description}}
+        {% endblock %}
+	</div>
+
+</section>
