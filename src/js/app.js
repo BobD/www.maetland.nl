@@ -75,8 +75,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
     // }, 1);
 
 	// Temp
-	moodBoard.minimize();
-	$header.classList.remove('header--full');
+	// moodBoard.minimize();
+	// $header.classList.remove('header--full');
 });
 
 function scrollTosection(hash){
