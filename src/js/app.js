@@ -91,6 +91,7 @@ function scrollTosection(hash){
     }
 }
 
+
 // function getScrollPercent() {
 //     var h = document.documentElement, 
 //         b = document.body,
