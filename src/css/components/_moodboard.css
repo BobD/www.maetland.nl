@@ -19,9 +19,51 @@
 .moodboard__header{
 }
 
+.moodboard__caption{
+	position: absolute;
+	left: 100%;
+	margin-left: 3rem;
+	bottom: 3rem;
+	white-space: nowrap;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: inherit;
+	cursor: pointer;
+
+	transition: opacity .5s ease;
+	opacity: 0;
+
+	&:after{
+        content: '';
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: -1%;
+        right: 1%;
+        height: 1px;
+        width: 0%;
+        background: currentColor;
+        transition: width .5s ease .5s;
+        opacity: .75;
+        margin: 0 auto;
+        margin-top: 0.2em;
+    }
+}
+
+.moodboard__scroll{
+	position: absolute;
+	right: 3rem;
+	bottom: 3rem;
+	text-decoration: none;
+	color: white;
+	font-size: 3rem;
+	line-height: 1;
+	opacity: 0;
+	transition: opacity .5s ease;
+}
+
 .moodboard__info{
 	z-index: 2;
-	/*width: 100%;*/
 	background: transparent;
 	color: white;
 	pointer-events: none;
@@ -32,6 +74,7 @@
 	white-space: nowrap;
 	position: relative;
 	top: 50%;
+	margin-top: -.5em;
 }
 
 .moodboard__info-item{
@@ -41,6 +84,7 @@
 	font-size: var(--ms0);
 	opacity: 0;
 	transition: opacity ease .5s;
+	font-weight: bold;
 
 	&.show{
 		opacity: 1;
@@ -64,13 +108,103 @@
 	left:  var(--hero-offet-left);
 }
 
+.moodboard--maximize .slick-arrow,
+.moodboard--maximize .slick-arrow.slick-disabled{
+	opacity: 0;
+}
+
+.moodboard--init .moodboard__caption{
+	opacity: 1;
+}
+
+.moodboard--init .moodboard__caption:after{
+	width: 100%;
+}
+
+.moodboard--scrolled .moodboard__caption{
+	opacity: 0;
+}
+
+.moodboard:not(.moodboard--maximize) .moodboard__scroll{
+	opacity: 0;
+}
+
+.moodboard--scrolled .moodboard__scroll{
+	opacity: 1;
+}
+
+
+
 
 /* Slick overides */
-
 .slick-list{
 	height: 100%;
 }
 
 .slick-track{
 	height: 100%;
+}
+
+.slick-arrow{
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+
+    background: transparent;
+    padding: 0;
+    border: none;
+    outline: none;
+
+    line-height: 0px;
+    font-size: 0px;
+    color: white;
+    cursor: pointer;
+
+    transition: all ease .5s;
+
+
+    /* Apply Awesome fonts */
+    font-family: FontAwesome;
+}
+
+.slick-arrow:hover{
+	transform: scale(1.25, 1.25);
+	transform-origin: center;
+}
+
+.slick-arrow.slick-disabled{
+	opacity: .25;
+	transform: scale(1, 1);
+	cursor: default;
+}
+
+
+.slick-arrow:before{
+	content: '';
+	display: inline-block;
+	font-size: 4rem;
+}
+
+.slick-prev{
+    left: 0;
+}
+
+.slick-prev:before{
+	content: "\f104";
+}
+
+.slick-next{
+    right: 0;
+}
+
+.slick-next:before{
+	content: "\f105";
+}
+
+.slick-prev {
+    left: 1rem;
+}
+
+.slick-next {
+    right: 1rem;
 }

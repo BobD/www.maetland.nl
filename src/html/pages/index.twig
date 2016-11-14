@@ -4,10 +4,10 @@
 
 {% block main %}
 
-	<div data-js="content" class="content">
+	<div data-js="content" class="content" id="content">
 		
 		{% for page in pages %}
-			<section class="section">
+			<section class="section content__section">
 				{% for section in page.attributes.sections %}
 					{% embed "components/_section.twig" with {"content": section.attributes, "modifiers": "", "index": 0, "id": "" }  %}
 					{% endembed %}
@@ -22,9 +22,4 @@
 {# Somehow placing this block above the main block does not work? Weird.. #}
 {% block header %}
 	{% include "components/_moodboard.twig" with {"pages": pages} %}
-
-	<div data-js="scroll-trigger" class="header__scroll-button">
-		Scroll
-	</div>
-
 {% endblock %}

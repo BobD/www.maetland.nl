@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import $ from 'jquery';
 import log from './utils/logger';
 import ScreenMode from './utils/screenmode';
 import MoodBoard from './modules/moodboard';
@@ -13,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	let $body = document.querySelector('body');
 	let $header = document.querySelector("*[data-js='header']");
 	let $contentSections = document.querySelectorAll("*[data-js='content-section']");
-	let introContainer =  document.querySelector("*[data-js='content']");
-	let scrollTrigger =  document.querySelector("*[data-js='scroll-trigger']");
+	let $contentContainer =  document.querySelector("*[data-js='content']");
+	let $scrollTrigger =  document.querySelector("*[data-js='scroll-trigger']");
 	let activeContentSection;
 
 	$html.classList.remove('no-js');
@@ -40,23 +41,43 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		contentSection.on('close', (e) => {
 		});
 	});
-	
-	window.addEventListener('scroll', function() {
-        let scrollPos = getScrollPercent();
 
-        if(scrollPos == 0){
-        	$header.classList.add('header--full');
-        }else{
-        	$header.classList.remove('header--full');
-        }
+	$scrollTrigger.addEventListener('click', (e) => {
+		moodBoard.minimize();
+		e.preventDefault();
+	});	
+
+	moodBoard.on('maximize', (e) => {
+		$header.classList.add('header--full');
+	});
+
+	moodBoard.on('minimize', (e) => {
+		$header.classList.remove('header--full');
+	});
+
+	moodBoard.on('change', (e) => {
+		log(e);
 	});
 });
 
+function scrollTo(el){
+    let target = $(el.hash);
 
-function getScrollPercent() {
-    var h = document.documentElement, 
-        b = document.body,
-        st = 'scrollTop',
-        sh = 'scrollHeight';
-    return (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
+    target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+    
+    if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 500);
+        return false;
+    }
 }
+
+
+// function getScrollPercent() {
+//     var h = document.documentElement, 
+//         b = document.body,
+//         st = 'scrollTop',
+//         sh = 'scrollHeight';
+//     return (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
+// }
