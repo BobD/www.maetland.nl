@@ -67,7 +67,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		scrollTosection(e.id);
 	});
 
-
 	// document.documentElement.scrollTop = 0;
 	// log(document.documentElement.scrollTop);
     //  $('html, body').animate({
