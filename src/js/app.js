@@ -3,7 +3,7 @@ import $ from 'jquery';
 import log from './utils/logger';
 import ScreenMode from './utils/screenmode';
 import MoodBoard from './modules/moodboard';
-import ContentSection from './modules/content-section';
+import Block from './modules/block';
 
 window.log = log;
 
@@ -13,10 +13,10 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	let $html = document.querySelector('html');
 	let $body = document.querySelector('body');
 	let $header = document.querySelector("*[data-js='header']");
-	let $contentSections = document.querySelectorAll("*[data-js='content-section']");
+	let $blocks = document.querySelectorAll("*[data-js='block']");
 	let $contentContainer =  document.querySelector("*[data-js='content']");
 	let $scrollTrigger =  document.querySelector("*[data-js='scroll-trigger']");
-	let activeContentSection;
+	let activeBlock;
 
 	$html.classList.remove('no-js');
 	$html.classList.add('js');
@@ -25,20 +25,20 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		$html.classList.add(modifier);
 	});
 
-	Array.from($contentSections).forEach(($section) => {
-		let contentSection = new ContentSection({
-			$section: $section
+	Array.from($blocks).forEach(($block) => {
+		let block = new Block({
+			$block: $block
 		});
 
-		contentSection.on('open', (e) => {
-			if(activeContentSection){
-				activeContentSection.close();
+		block.on('open', (e) => {
+			if(activeBlock){
+				activeBlock.close();
 			}
 
-			activeContentSection = contentSection;
+			activeBlock = block;
 		});
 
-		contentSection.on('close', (e) => {
+		block.on('close', (e) => {
 		});
 	});
 
@@ -56,18 +56,37 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	});
 
 	moodBoard.on('change', (e) => {
-		log(e);
+		let goingUp = e.currentSlide > e.nextSlide;
+		let $sections = document.querySelectorAll(".page__section");
+		Array.from($sections).forEach(($section) => {
+			log($section);
+			$section.classList.remove('active');
+		});
+		let $activeSection = document.getElementById(e.id);
+		$activeSection.classList.add('active');
+		scrollTosection(e.id);
 	});
+
+
+	// document.documentElement.scrollTop = 0;
+	// log(document.documentElement.scrollTop);
+    //  $('html, body').animate({
+    //   scrollTop: 0
+    // }, 1);
+
+	// Temp
+	moodBoard.minimize();
+	$header.classList.remove('header--full');
 });
 
-function scrollTo(el){
-    let target = $(el.hash);
-
-    target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+function scrollTosection(hash){
+    let target = $(`#${hash}`);
+    let topOffset = window.outerWidth * .25;
+    let offset =  (target.offset().top - topOffset) - 50;
     
     if (target.length) {
         $('html, body').animate({
-          scrollTop: target.offset().top
+          scrollTop: offset
         }, 500);
         return false;
     }

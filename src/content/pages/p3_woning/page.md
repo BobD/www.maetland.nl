@@ -1,5 +1,6 @@
 ---
-title: De Woning
+title: Klimaatneutrale villa
+caption: De woning
 description:
 background: purple
 ---

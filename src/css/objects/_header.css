@@ -1,9 +1,2 @@
 .header{
-	background: var(--color-black);
-	@util aspect-ratio(4:1);
-	transition: padding-bottom ease 1s;
-
-	&.header--full{
-		padding-bottom: 100vh;
-	}
 }

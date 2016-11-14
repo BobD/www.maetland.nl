@@ -76,6 +76,8 @@ gulp.task('data', () => {
             try {
                 let fileSource = fs.readFileSync(file, 'utf-8');
                 let fileContent = frontMatter(fileSource);
+                fileContent.attributes.id =  slug(fileContent.attributes.title, {lower:true});
+
                 fileContent.attributes.images = [];
                 images.forEach((entry) => {
                     fileContent.attributes.images.push(`./images/${type}/${source}/${entry}`);
@@ -94,7 +96,7 @@ gulp.task('data', () => {
         _.extend(data, {env: args.env});
         siteData = data;  
 
-        console.log(siteData);
+        // console.log(siteData.pages.p1_home.attributes);
     }));
 
     return stream;

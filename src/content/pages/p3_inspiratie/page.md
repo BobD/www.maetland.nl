@@ -1,5 +1,6 @@
 ---
-title: Stijl & Inspiratie
+title: Warm & aards
+caption: Stijl & inspiratie
 description:
 background: green
 ---

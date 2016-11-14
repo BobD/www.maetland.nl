@@ -21,12 +21,12 @@ class MoodBoard {
 			slide: '.moodboard__item',
 			// appendArrows: false,
 			speed: moveDuration,
-			infinite: false,
+			// infinite: false,
 			draggable: false
 		});
 
 		this.$list.on('beforeChange', (e, slick, currentSlide, nextSlide) => {
-			let offsetX = nextSlide* 100;
+			let offsetX = nextSlide * 100;
 		  	Velocity($infoList, {translateZ: 0, translateX: `-${offsetX}%`}, {queue: false, duration: moveDuration});
 
 		  	$infoList.find('.moodboard__info-item.show').removeClass('show');
@@ -40,17 +40,18 @@ class MoodBoard {
 
 		  	this.eventEmitter.emit('change', {
 		  		currentSlide: currentSlide,
-		  		nextSlide: nextSlide
+		  		nextSlide: nextSlide,
+		  		id: this.$list.find('.moodboard__item').eq(nextSlide + 1).attr('data-id')
 		  	});
 
 		  	this.$container.addClass('moodboard--scrolled');
 		});
 
-		if(document.body.scrollTop == 0){
+		// if(document.body.scrollTop == 0){
 			this.maximize();
-		}else{
-			this.minimize();
-		}
+		// }else{
+			// this.minimize();
+		// }
 	}
 
 	on(){

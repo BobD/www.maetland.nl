@@ -2,9 +2,20 @@
 	padding: 2em 0;
 	margin: 0 auto;
 	width: 66%;
-	max-width: 50em;
+	max-width: 75em;
+	overflow: hidden;
 }
 
-.content__section{
-	
-}
+/*.js .content__section{
+	opacity: 0;
+	margin: 0;
+	height: 0;
+	transform: translateY(-100%);
+	transition: all ease .5s;
+
+	&.active{
+		opacity: 1;
+		height: auto;
+		transform: translateY(0);
+	}
+}*/

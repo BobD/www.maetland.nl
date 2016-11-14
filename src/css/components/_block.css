@@ -1,0 +1,62 @@
+.block{
+	margin: 4em;
+}
+
+.block__header,
+.block__content{
+
+}
+
+.block__header{
+	background-color: var(--color-black);
+	color: white;
+	text-align: center;
+	user-select: none;
+	cursor: pointer;
+	padding: .75em;
+	letter-spacing: .05em;
+}
+
+.block__title{
+	text-transform: uppercase;
+}
+
+.block__caption{
+	opacity: .5;
+}
+
+.block__icon{
+	font-size: 1.5em;
+	line-height: 1;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height ease .5s;
+}
+
+.block__content-container{
+	max-height: 10em;
+	overflow: hidden;
+	transition: max-height ease .5s;
+}
+
+.block__content{
+	padding: 1em 0;
+
+}
+
+.block{
+	&.closed{
+
+		& .block__header{
+			padding: 1em;
+		}
+
+		& .block__icon{
+			max-height: 1em;
+		}
+
+		& .block__content-container{
+			max-height: 0;
+		}
+	}	
+}

@@ -10,8 +10,8 @@
 		<ul class="moodboard__info-list">
 			{% spaceless %}
 				{% for page in pages %}
-					<li class="moodboard__info-item">
-						{{page.attributes.title}}
+					<li class="moodboard__info-item {% if loop.first %}show{% endif %}">
+						{{page.attributes.caption}}
 					</li>
 				{% endfor %}
 			{% endspaceless %}
@@ -21,12 +21,11 @@
 	<ul class="moodboard__list">
 		
 		{% for page in pages %}
-			<li class="moodboard__item" style="background:{{page.attributes.background}}">
+			<li class="moodboard__item" style="background:{{page.attributes.background}}" data-id="{{page.attributes.id}}">
 			</li>
 		{% endfor %}
 
 	</ul>
-
 
 	<a href="#content" data-js="scroll-trigger" class="moodboard__scroll">
 		<span class="fa fa-chevron-circle-down"></span>

@@ -1,0 +1,24 @@
+{% set sectionIndex = (index + 1) |default(1) %}
+{% set sectionId = id %}
+
+<div data-js="block" class="block {% if not loop.first %}closed{% endif %}">
+	
+	<header class="block__header">
+		<h{{sectionIndex}} class="block__title">
+			<span class="block__caption">{{content.attributes.description}}</span>
+			{{content.attributes.title}}
+		</h{{sectionIndex}}>
+		<div class="block__icon">
+			<i class="fa fa-angle-down"></i>
+		</div>
+	</header>
+
+	<div class="block__content-container">
+        {% block content %}
+        	<div class="block__content">
+        	{{content.body}}
+        	</div>
+        {% endblock %}
+	</div>
+
+</div>

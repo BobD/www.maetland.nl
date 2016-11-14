@@ -3,9 +3,35 @@
 }
 
 .page__header{
+	@util aspect-ratio(4:1);
+	transition: padding-bottom ease 1s;
+
+	&.header--full{
+		padding-bottom: 100vh;
+	}
+
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 1;
 }
 
 .page__main{
+	position: relative;
+	margin-top: calc(25%);
+}
+
+.page__section{
+/*	opacity: 0;
+	max-height: 0;
+	margin: 0 !important;
+	transition: all ease .5s;*/
+}
+
+.page__section.active{
+/*	opacity: 1;
+	max-height: 100em;*/
 }
 
 .page__footer{

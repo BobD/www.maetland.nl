@@ -7,9 +7,14 @@
 	<div data-js="content" class="content" id="content">
 		
 		{% for page in pages %}
-			<section class="section content__section">
-				{% for section in page.attributes.sections %}
-					{% embed "components/_section.twig" with {"content": section.attributes, "modifiers": "", "index": 0, "id": "" }  %}
+			<section class="section page__section {% if loop.first %} active {% endif %}" id="{{page.attributes.id}}">
+
+				<header class="section__header">
+					<h{{loop.index}}  class="section__title">{{page.attributes.title}}</h{{loop.index}}>
+				</header>
+
+				{% for block in page.attributes.sections %}
+					{% embed "components/_block.twig" with {"content": block, "modifiers": "", "index": 0, "id": "" }  %}
 					{% endembed %}
 				{% endfor %}
 			</section>
