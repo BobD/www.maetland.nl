@@ -1,5 +1,5 @@
 .page{
-
+	overflow: hidden;
 }
 
 .page__header{
@@ -9,7 +9,13 @@
 	&.header--full{
 		padding-bottom: 100vh;
 	}
+}
 
+.page__footer{
+}
+
+
+.js .page__header{
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -17,22 +23,13 @@
 	z-index: 1;
 }
 
-.page__main{
+.js  .page__main{
+}
+
+.js .page--detail{
+	overflow: auto;
+}
+
+.js .page--detail .page__header{
 	position: relative;
-	margin-top: calc(25%);
-}
-
-.page__section{
-/*	opacity: 0;
-	max-height: 0;
-	margin: 0 !important;
-	transition: all ease .5s;*/
-}
-
-.page__section.active{
-/*	opacity: 1;
-	max-height: 100em;*/
-}
-
-.page__footer{
 }

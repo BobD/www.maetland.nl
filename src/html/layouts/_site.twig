@@ -10,8 +10,9 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <link href="https://fonts.googleapis.com/css?family=Oxygen:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,700|Montserrat:400,700" rel="stylesheet">
         <link rel="stylesheet" href="css/app.css">
+        <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
 
         <!--[if lt IE 9]>
             <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -31,6 +32,22 @@
         </main>
         
         <footer class="footer page__footer">
+
+            <ul class="footer__nav">
+
+                {% for page in pages %}
+                    <li class="footer__nav-item" data-id={{page.attributes.id}}>
+                        <span class="footer__nav-label title">Volgende Pagina</span>
+                        <span class="footer__nav-divider">|</span>
+                        <a href="#{{page.attributes.id}}" class="footer__nav-link title">{{page.attributes.title}}</a>
+                    </li>
+                {% endfor %}
+                
+            </ul>
+            
+    
+            <img class="footer__logo" src="./images/maetland-logo-small.svg" alt="" width="35">
+
             {% block footer %}
                 <script src="js/app.bundle.js" charset="utf-8"></script>
 

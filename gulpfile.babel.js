@@ -96,7 +96,7 @@ gulp.task('data', () => {
         _.extend(data, {env: args.env});
         siteData = data;  
 
-        // console.log(siteData.pages.p1_home.attributes);
+        console.log(siteData.pages.p1_home.attributes);
     }));
 
     return stream;
@@ -180,6 +180,12 @@ gulp.task('styles', function () {
     	.pipe(livereload({ }));
 });
 
+gulp.task('site-images', function () {
+  return gulp.src(`${contentDir}/images/**/*.*`)
+        .pipe(changed(destinationDir))
+        .pipe(imagemin())
+        .pipe(gulp.dest(`${destinationDir}/images`))
+});
 
 gulp.task('project-images', function () {
   return gulp.src(`${contentDir}/projects/**/images/*.*`)
@@ -205,7 +211,7 @@ gulp.task('page-images', function () {
         .pipe(gulp.dest(`${destinationDir}/images`))
 });
 
-gulp.task('images', ['project-images', 'page-images']);
+gulp.task('images', ['site-images', 'project-images', 'page-images']);
 
 gulp.task('watch', ['data'], () => {
     livereload.listen();

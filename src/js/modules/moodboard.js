@@ -9,6 +9,7 @@ class MoodBoard {
 		this.eventEmitter = new Events.EventEmitter();
 		this.$container = $("*[data-js='moodboard']");
 		this.$list = this.$container.find('.moodboard__list');
+		this.$back = this.$container.find('.moodboard__back');
 		this.scrollHandler = this.onScroll.bind(this);
 		this.lock = false;
 
@@ -47,11 +48,12 @@ class MoodBoard {
 		  	this.$container.addClass('moodboard--scrolled');
 		});
 
-		// if(document.body.scrollTop == 0){
-			this.maximize();
-		// }else{
-			// this.minimize();
-		// }
+		this.$back.on('click', (e) => {
+			this.removeDetail();
+			e.preventDefault();
+		});
+
+		this.maximize();
 	}
 
 	on(){
@@ -84,17 +86,26 @@ class MoodBoard {
 		this.eventEmitter.emit('maximize', {});
 		this.$container.addClass('moodboard--maximize');
 		window.addEventListener('mousewheel', this.scrollHandler);
-
-		setTimeout(() => {
-			this.$container.addClass('moodboard--init');
-		}, 1000);
 	}
 
 	minimize(){
 		this.eventEmitter.emit('minimize', {});
 		this.$container.removeClass('moodboard--maximize');
-		this.$container.removeClass('moodboard--init');
 		window.removeEventListener('mousewheel', this.scrollHandler);
+	}
+
+	detail(){
+		let currentIndex = 	this.$list.slick('slickCurrentSlide');
+		let detailId = this.$list.find('.moodboard__item').eq(currentIndex + 1).attr('data-id');
+		this.eventEmitter.emit('detail', {
+			id: detailId
+		});
+		window.removeEventListener('mousewheel', this.scrollHandler);
+	}
+
+	removeDetail(){
+		this.eventEmitter.emit('remove-detail', {});
+		window.addEventListener('mousewheel', this.scrollHandler);
 	}
 
 }

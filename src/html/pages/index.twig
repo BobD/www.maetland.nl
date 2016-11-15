@@ -4,10 +4,26 @@
 
 {% block main %}
 
+	<style>
+
+		{% for page in pages %}
+
+			.js .content__section{
+				display: none;
+			} 
+
+			.js .content[data-section="{{page.attributes.id}}"] #{{page.attributes.id}}{
+				display: block;
+			}
+
+		{% endfor %}
+
+	</style>
+
 	<div data-js="content" class="content" id="content">
 		
 		{% for page in pages %}
-			<section class="section page__section {% if loop.first %} active {% endif %}" id="{{page.attributes.id}}">
+			<section class="section content__section {% if loop.first %} active {% endif %}" id="{{page.attributes.id}}">
 
 				<header class="section__header">
 					<h{{loop.index}}  class="section__title">{{page.attributes.title}}</h{{loop.index}}>
@@ -27,4 +43,8 @@
 {# Somehow placing this block above the main block does not work? Weird.. #}
 {% block header %}
 	{% include "components/_moodboard.twig" with {"pages": pages} %}
+	
+	<div class="header__nav">
+		<a href="contact.html" class="header__link title">Contact</a>
+	</div>
 {% endblock %}

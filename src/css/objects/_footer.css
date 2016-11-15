@@ -1,5 +1,31 @@
 .footer{
 	background: var(--color-black);
+	text-align: center;
+	padding: 2em;
+	color: white;
+}
 
-	height: 10em;
+.footer__nav{
+	padding: 2em;
+}
+
+.footer__nav-label{
+	color: var(--color-caption);
+}
+
+.footer__nav-divider{
+	margin: 0 .35em;
+}
+
+.footer__nav-item{
+
+}
+
+.footer__nav-link{
+	color: inherit;
+	text-decoration: none;
+}
+
+.footer__logo{
+
 }

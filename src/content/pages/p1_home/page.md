@@ -1,7 +1,6 @@
 ---
 title: Mogelijkheden en visie
-caption: Home
+caption:
 description:
-background: yellow
 ---
 Index page

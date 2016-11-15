@@ -52,5 +52,8 @@
 }
 
 :root {
-	--typo-font-size-base: 14px;
+	--typo-font-size-base: 15px;
+	/* https://fonts.google.com/?query=Crimson&selection.family=Crimson+Text:400,400i,700|Montserrat:400,700 */
+	--body-font: 'Crimson Text', serif;
+	--header-font: 'Montserrat', sans-serif;
 }

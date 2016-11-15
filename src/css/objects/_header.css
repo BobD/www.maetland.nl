@@ -1,2 +1,49 @@
 .header{
+	color: white;
+}
+
+.header__nav{
+	position: absolute;
+	top: var(--header-links-top-offset);
+	right: 0;
+}
+
+.header__link{
+	position: relative;
+	text-transform: uppercase;
+	display: block;
+	width: 9rem;
+	color: inherit;
+	text-decoration: none;
+
+	transition: opacity .5s ease 1s;
+	opacity: 0;
+
+	&:after{
+        content: '';
+        display: block;
+        position: absolute;
+        top: 104%;
+        right: -1%;
+        left: -4%;
+        height: 1px;
+        width: 0%;
+        background: currentColor;
+        transition: width .5s ease 1.5s;
+        opacity: .75;
+        margin: 0 auto;
+        margin-top: 0.2em;
+    }
+}
+
+.page--init .header__link{
+	opacity: 1;
+}
+
+.page--init .header__link:after{
+	width: 100%;
+}
+
+.page--detail{
+	
 }

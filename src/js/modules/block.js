@@ -17,7 +17,7 @@ class Block {
 			if(isClosed){
 				this.$block.classList.remove('closed');
 			}else{
-				this.$block.classList.add('closed');
+				// this.$block.classList.add('closed');
 			}
 
 			this.eventEmitter.emit(!isClosed ? 'close' : 'open', {
@@ -28,6 +28,10 @@ class Block {
 
 	close(){
 		this.$block.classList.add('closed');
+	}
+
+	open(){
+		this.$block.classList.remove('closed');
 	}
 
 	on(){

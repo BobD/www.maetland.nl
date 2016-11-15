@@ -12,7 +12,6 @@
 	color: white;
 	text-align: center;
 	user-select: none;
-	cursor: pointer;
 	padding: .75em;
 	letter-spacing: .05em;
 }
@@ -22,7 +21,7 @@
 }
 
 .block__caption{
-	opacity: .5;
+	color: var(--color-caption);
 }
 
 .block__icon{
@@ -48,6 +47,7 @@
 
 		& .block__header{
 			padding: 1em;
+			cursor: pointer;
 		}
 
 		& .block__icon{

@@ -1,6 +1,15 @@
 body{
-	font-family: 'Oxygen', sans-serif;
+	font-family: var(--body-font);
 	font-size: var(--typo-font-size-base);
-	line-height: 1.6;
+	line-height: 1.5;
 	color: var(--text-color);
+}
+
+h1, 
+h2,
+h3,
+h4,
+h5,
+.title{
+	font-family: var(--header-font);
 }
