@@ -4,21 +4,23 @@ import log from './utils/logger';
 import ScreenMode from './utils/screenmode';
 import MoodBoard from './modules/moodboard';
 import Block from './modules/block';
+import Footer from './modules/footer';
 
 window.log = log;
 
 document.addEventListener("DOMContentLoaded", function(e) {
 	let moodBoard = new MoodBoard();
 	let screenMode = new ScreenMode();
+	let footer = new Footer();
 	let $html = document.querySelector('html');
 	let $body = document.querySelector('body');
 	let $page = document.querySelector('.page');
 	let $content = document.querySelector('.content');
 	let $header = document.querySelector("*[data-js='header']");
 	let $sections = document.querySelectorAll(".content__section");
-	let sectionStore = {};
 	let $contentContainer =  document.querySelector("*[data-js='content']");
 	let $scrollTrigger =  document.querySelector("*[data-js='scroll-trigger']");
+	let sectionStore = {};
 
 	$html.classList.remove('no-js');
 	$html.classList.add('js');
@@ -26,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	screenMode.modifiers.forEach((modifier) =>{
 		$html.classList.add(modifier);
 	});
-
 
 	$scrollTrigger.addEventListener('click', (e) => {
 		moodBoard.detail();
@@ -73,6 +74,10 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		scrollTosection(e.id);
 	});
 
+	footer.on('detail', (e) => {
+		log(e.id)
+	});
+
 	setTimeout(() => {
 		$page.classList.add('page--init');
 	}, 1000);
@@ -84,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	});
 
 	// Temp
-	// moodBoard.detail();
+	moodBoard.detail();
 });
 
 function initBlocks($section){
