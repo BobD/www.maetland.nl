@@ -103,6 +103,11 @@ class MoodBoard {
 		window.removeEventListener('mousewheel', this.scrollHandler);
 	}
 
+	goToDetail(id){
+		let $slickItem = this.$list.find(`.slick-slide[data-id="${id}"]`);
+		this.$list.slick('slickGoTo', $slickItem.index() - 1);
+	}
+
 	removeDetail(){
 		this.eventEmitter.emit('remove-detail', {});
 		window.addEventListener('mousewheel', this.scrollHandler);

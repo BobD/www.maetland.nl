@@ -43,15 +43,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	});
 
 	moodBoard.on('detail', (e) => {
-		let $section = document.querySelector(`#${e.id}`);
-		$content.setAttribute('data-section', e.id);
-
-		resetBlocks(sectionStore[e.id]);
-
-		setTimeout(() => {
-			$('html, body').scrollTop(0);
-			$page.classList.add('page--detail');
-		}, 10);
+		ShowDetail(e.id);
 	});
 
 	moodBoard.on('remove-detail', (e) => {
@@ -63,24 +55,14 @@ document.addEventListener("DOMContentLoaded", function(e) {
         }, 500);
 	});
 
-	moodBoard.on('change', (e) => {
-		let goingUp = e.currentSlide > e.nextSlide;
-		let $sections = document.querySelectorAll(".page__section");
-		Array.from($sections).forEach(($section) => {
-			$section.classList.remove('active');
-		});
-		let $activeSection = document.getElementById(e.id);
-		$activeSection.classList.add('active');
-		scrollTosection(e.id);
-	});
-
 	footer.on('detail', (e) => {
-		log(e.id)
-	});
+		moodBoard.goToDetail(e.id);
+		$('html, body').animate({
+          scrollTop: 0
+        }, 250);
 
-	setTimeout(() => {
-		$page.classList.add('page--init');
-	}, 1000);
+        ShowDetail(e.id);
+	});
 
 	Array.from($sections).forEach(($section) => {
 		let sectionId = $section.getAttribute('id');
@@ -88,66 +70,72 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		sectionStore[sectionId] = blocks;
 	});
 
-	// Temp
-	moodBoard.detail();
-});
+	function ShowDetail(id){
+		let $section = document.querySelector(`#${id}`);
+		$content.setAttribute('data-section', id);
 
-function initBlocks($section){
-	let $blocks = $section.querySelectorAll("*[data-js='block']");
-	let blockStore = [];
-	let index = 0;
-	let activeBlock;
+		resetBlocks(sectionStore[id]);
 
-	Array.from($blocks).forEach(($block) => {
-		let block = new Block({
-			$block: $block
-		});
+		setTimeout(() => {
+			$('html, body').scrollTop(0);
+			$page.classList.add('page--detail');
+		}, 10);
+	}
 
-		if(index == 0){
-			activeBlock = block;
-		}
+	function initBlocks($section){
+		let $blocks = $section.querySelectorAll("*[data-js='block']");
+		let blockStore = [];
+		let index = 0;
+		let activeBlock;
 
-		block.on('open', (e) => {
-			if(activeBlock){
-				activeBlock.close();
+		Array.from($blocks).forEach(($block) => {
+			let block = new Block({
+				$block: $block
+			});
+
+			if(index == 0){
+				activeBlock = block;
 			}
 
-			activeBlock = block;
+			block.on('open', (e) => {
+				if(activeBlock){
+					activeBlock.close();
+				}
+
+				activeBlock = block;
+			});
+
+			block.on('close', (e) => {
+			});
+
+
+			blockStore.push(block);
+			++index;
 		});
 
-		block.on('close', (e) => {
+		return blockStore;
+	}
+
+	function resetBlocks(blocks){
+		let index = 0;
+		blocks.forEach((block) => {
+			if(index == 0){
+				block.open();
+			}else{
+				block.close();
+			}
+
+			++index;
 		});
+	}
+
+	setTimeout(() => {
+		$page.classList.add('page--init');
+	}, 1000);
+
+	// Temp
+	// moodBoard.detail();
+
+});
 
 
-		blockStore.push(block);
-		++index;
-	});
-
-	return blockStore;
-}
-
-function resetBlocks(blocks){
-	let index = 0;
-	blocks.forEach((block) => {
-		if(index == 0){
-			block.open();
-		}else{
-			block.close();
-		}
-
-		++index;
-	});
-}
-
-function scrollTosection(hash){
-    let target = $(`#${hash}`);
-    let topOffset = window.outerWidth * .25;
-    let offset =  (target.offset().top - topOffset) - 50;
-    
-    if (target.length) {
-        $('html, body').animate({
-          scrollTop: offset
-        }, 500);
-        return false;
-    }
-}

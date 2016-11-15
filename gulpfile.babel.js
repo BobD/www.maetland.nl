@@ -213,6 +213,13 @@ gulp.task('page-images', function () {
 
 gulp.task('images', ['site-images', 'project-images', 'page-images']);
 
+gulp.task('public', function () {
+  return gulp.src([`${sourceDir}/public/*.*`, `${sourceDir}/public/.*`])
+        .pipe(changed(destinationDir))
+        .pipe(gulp.dest(`${destinationDir}/`))
+});
+
+
 gulp.task('watch', ['data'], () => {
     livereload.listen();
     gulp.watch('./gulpfile.babel.js', ['default']);
@@ -247,7 +254,7 @@ gulp.task('clean', () => {
 });
 
 
-gulp.task('default', ['compile', 'styles', 'images']);
+gulp.task('default', ['public', 'compile', 'styles', 'images']);
 
 
 
