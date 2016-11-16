@@ -1,0 +1,8 @@
+.title{
+	text-transform: uppercase;
+	font-weight: bold;
+
+	&.title--large{
+		font-size: var(--ms1);
+	}
+}

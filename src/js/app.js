@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import $ from 'jquery';
 import log from './utils/logger';
+import History from './modules/history';
 import ScreenMode from './utils/screenmode';
 import MoodBoard from './modules/moodboard';
 import Block from './modules/block';
@@ -9,6 +10,7 @@ import Footer from './modules/footer';
 window.log = log;
 
 document.addEventListener("DOMContentLoaded", function(e) {
+	let history = new History();
 	let moodBoard = new MoodBoard();
 	let screenMode = new ScreenMode();
 	let footer = new Footer();
@@ -20,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	let $sections = document.querySelectorAll(".content__section");
 	let $contentContainer =  document.querySelector("*[data-js='content']");
 	let $scrollTrigger =  document.querySelector("*[data-js='scroll-trigger']");
+	let $contactTrigger =  document.querySelector("*[data-js='contact-trigger']");
 	let sectionStore = {};
 
 	$html.classList.remove('no-js');
@@ -34,34 +37,40 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		e.preventDefault();
 	});	
 
+	$contactTrigger.addEventListener('click', (e) => {
+		moodBoard.removeDetail();
+		moodBoard.goTo('contact');
+		e.preventDefault();
+	});	
+
 	moodBoard.on('maximize', (e) => {
 		$header.classList.add('header--full');
 	});
 
-	moodBoard.on('minimize', (e) => {
-		$header.classList.remove('header--full');
+	moodBoard.on('change', (e) => {
+
 	});
 
 	moodBoard.on('detail', (e) => {
-		ShowDetail(e.id);
+		showDetail(e.id);
 	});
 
 	moodBoard.on('remove-detail', (e) => {
-		$content.setAttribute('data-section', '');
-		$page.classList.remove('page--detail');
-
-		$('html, body').animate({
-          scrollTop: 0
-        }, 500);
+		removeDetail();
 	});
 
 	footer.on('detail', (e) => {
-		moodBoard.goToDetail(e.id);
+		moodBoard.goTo(e.id);
 		$('html, body').animate({
           scrollTop: 0
         }, 250);
 
-        ShowDetail(e.id);
+		if(e.id != 'contact'){
+        	showDetail(e.id);
+		}else{
+			moodBoard.removeDetail();
+		}
+
 	});
 
 	Array.from($sections).forEach(($section) => {
@@ -70,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		sectionStore[sectionId] = blocks;
 	});
 
-	function ShowDetail(id){
+	function showDetail(id){
 		let $section = document.querySelector(`#${id}`);
 		$content.setAttribute('data-section', id);
 
@@ -80,6 +89,17 @@ document.addEventListener("DOMContentLoaded", function(e) {
 			$('html, body').scrollTop(0);
 			$page.classList.add('page--detail');
 		}, 10);
+
+		$page.setAttribute('data-page', id);
+	}
+
+	function removeDetail(){
+		$content.setAttribute('data-section', '');
+		$page.classList.remove('page--detail');
+
+		$('html, body').animate({
+          scrollTop: 0
+        }, 500);
 	}
 
 	function initBlocks($section){
@@ -129,9 +149,15 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		});
 	}
 
+
+
 	setTimeout(() => {
 		$page.classList.add('page--init');
 	}, 1000);
+
+		$('html, body').animate({
+          scrollTop: 0
+        }, 250);
 
 	// Temp
 	// moodBoard.detail();

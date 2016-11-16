@@ -1,6 +1,5 @@
 ---
-title: Zever zeer riante kavels
-caption: De kavels
+title: De kavels
+caption: Zeven zeer riante kavels
 description:
 ---
-Index page

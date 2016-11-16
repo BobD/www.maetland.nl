@@ -1,6 +1,5 @@
 ---
-title: Klimaatneutrale villa
-caption: De woning
+title: De woning
+caption: Klimaatneutrale villa
 description:
 ---
-Index page

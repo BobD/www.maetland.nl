@@ -32,20 +32,9 @@
         </main>
         
         <footer class="footer page__footer">
-
-            <ul class="footer__nav" data-js="footer-nav">
-
-                {% for page in pages %}
-                    <li class="footer__nav-item" data-id={{page.attributes.id}}>
-                        <span class="footer__nav-label title">Volgende Pagina</span>
-                        <span class="footer__nav-divider">|</span>
-                        <a href="#{{page.attributes.id}}" class="footer__nav-link title">{{page.attributes.title}}</a>
-                    </li>
-                {% endfor %}
-                
-            </ul>
             
-    
+            {% include "components/_footer-nav.twig" with {"pages": pages} %}
+            
             <img class="footer__logo" src="./images/maetland-logo-small.svg" alt="" width="35">
 
             {% block footer %}

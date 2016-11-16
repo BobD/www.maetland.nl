@@ -1,6 +1,5 @@
 ---
-title: Mogelijkheden en visie
-caption:
+title: Maetland
+caption: Mogelijkheden en visie
 description:
 ---
-Index page

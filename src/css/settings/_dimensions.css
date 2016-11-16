@@ -1,5 +1,7 @@
 :root {
 	--block-padding: 1rem;
+	--moodboard-offet-left: 10rem;
+	--moodboard-header-width: 16rem;
 	--hero-offet-left: 10rem;
 	--header-links-top-offset: 15%;
 }

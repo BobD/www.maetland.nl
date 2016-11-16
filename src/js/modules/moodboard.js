@@ -27,6 +27,8 @@ class MoodBoard {
 		});
 
 		this.$list.on('beforeChange', (e, slick, currentSlide, nextSlide) => {
+			// log(nextSlide);
+
 			let offsetX = nextSlide * 100;
 		  	Velocity($infoList, {translateZ: 0, translateX: `-${offsetX}%`}, {queue: false, duration: moveDuration});
 
@@ -85,13 +87,13 @@ class MoodBoard {
 	maximize(){
 		this.eventEmitter.emit('maximize', {});
 		this.$container.addClass('moodboard--maximize');
-		window.addEventListener('mousewheel', this.scrollHandler);
+		this.addScroll();
 	}
 
 	minimize(){
 		this.eventEmitter.emit('minimize', {});
 		this.$container.removeClass('moodboard--maximize');
-		window.removeEventListener('mousewheel', this.scrollHandler);
+		this.removeScroll();
 	}
 
 	detail(){
@@ -100,10 +102,10 @@ class MoodBoard {
 		this.eventEmitter.emit('detail', {
 			id: detailId
 		});
-		window.removeEventListener('mousewheel', this.scrollHandler);
+		this.removeScroll();
 	}
 
-	goToDetail(id){
+	goTo(id){
 		let $slickItem = this.$list.find(`.slick-slide[data-id="${id}"]`);
 		this.$list.slick('slickGoTo', $slickItem.index() - 1);
 	}
@@ -111,6 +113,16 @@ class MoodBoard {
 	removeDetail(){
 		this.eventEmitter.emit('remove-detail', {});
 		window.addEventListener('mousewheel', this.scrollHandler);
+	}
+
+	addScroll(){
+		window.addEventListener('mousewheel', this.scrollHandler);
+		window.addEventListener('DOMMouseScroll', this.scrollHandler);
+	}
+
+	removeScroll(){
+		window.removeEventListener('mousewheel', this.scrollHandler);
+		window.removeEventListener('DOMMouseScroll', this.scrollHandler);
 	}
 
 }

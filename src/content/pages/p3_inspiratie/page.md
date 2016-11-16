@@ -1,6 +1,5 @@
 ---
-title: Warm & aards
-caption: Stijl & inspiratie
+title: Stijl & inspiratie
+caption: Warm & aards
 description:
 ---
-Index page

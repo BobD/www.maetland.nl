@@ -5,3 +5,11 @@
 	max-width: 75em;
 	overflow: hidden;
 }
+
+@media (--small-viewport) {
+	.content{
+		max-width: none;
+		width: auto;
+		padding: 0;
+	}
+}

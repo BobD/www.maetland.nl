@@ -7,6 +7,10 @@
 }
 
 .section__title{
-	font-size: var(--ms1);
-	font-weight: bold;
+}
+
+@media (--small-viewport) {
+	.section{
+		margin: 0;
+	}
 }

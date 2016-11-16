@@ -10,6 +10,7 @@ import data from 'gulp-data';
 import gulpif from 'gulp-if';
 import imagemin from 'gulp-imagemin';
 import gulpFn from 'gulp-fn';
+import imageResize from 'gulp-image-resize';
 import eventStream from 'event-stream';
 import frontMatter from 'front-matter';
 import del from 'del';
@@ -28,12 +29,6 @@ let siteData;
 
 function getPageData(pageName){
     let { [pageName]: pageContent } = siteData.pages;
-    let data = Object.assign({}, siteData, {content: pageContent});
-    return data;
-}
-
-function getProjectData(projectName){
-    let { [projectName]: pageContent } = siteData.projects;
     let data = Object.assign({}, siteData, {content: pageContent});
     return data;
 }
@@ -80,7 +75,9 @@ gulp.task('data', () => {
 
                 fileContent.attributes.images = [];
                 images.forEach((entry) => {
-                    fileContent.attributes.images.push(`./images/${type}/${source}/${entry}`);
+                    if(path.extname(entry) === ".png" || path.extname(entry) === ".jpg" ){
+                        fileContent.attributes.images.push(`./images/${type}/${source}/${entry}`);
+                    }
                 })
                 fileContent.attributes.sections = [];
                 sections.forEach((section) => {
@@ -96,43 +93,10 @@ gulp.task('data', () => {
         _.extend(data, {env: args.env});
         siteData = data;  
 
-        console.log(siteData.pages.p1_home.attributes);
+        console.log(siteData);
     }));
 
     return stream;
-});
-
-gulp.task('projects', () => {
-    let twig = require('gulp-twig');
-    let files =  glob.sync(`${contentDir}/projects/**/*.md`, {});
-
-    files.forEach((file) => {
-        let fileName = path.basename(file, '.md');
-        try {
-            let fileSource = fs.readFileSync(file, 'utf-8');
-            let fileContent = frontMatter(fileSource);
-            let projects = {};
-            projects[fileName] = fileContent;
-            
-            gulp.src(`${sourceDir}/html/projects/_project.twig`)
-            .pipe(plumber())
-            .pipe(changed(destinationDir))
-            .pipe(data((file) => {
-                return getProjectData(fileName);
-            }))
-            .pipe(twig({
-                base: `${sourceDir}/html/`
-            }))
-            .pipe(rename({
-                dirname: 'projects',
-                basename: fileName,
-                extname: '.html'
-            }))
-            .pipe(gulp.dest(destinationDir))
-            .pipe(livereload({ }));
-
-        } catch (err) {}
-    })
 });
 
 gulp.task('pages', () => {
@@ -143,7 +107,6 @@ gulp.task('pages', () => {
     	.pipe(changed(destinationDir))
         .pipe(data((file) => {
             let pageName = path.basename(file.path, '.twig');
-            console.log('pages', pageName);
             return getPageData(pageName);
         }))
         .pipe(twig({
@@ -153,7 +116,6 @@ gulp.task('pages', () => {
         .pipe(livereload({ }));
 });
 
-// gulp.task('compile', ['data', 'pages', 'projects']);
 gulp.task('compile', ['data', 'pages']);
 
 gulp.task('styles', function () {
@@ -183,26 +145,20 @@ gulp.task('styles', function () {
 gulp.task('site-images', function () {
   return gulp.src(`${contentDir}/images/**/*.*`)
         .pipe(changed(destinationDir))
-        .pipe(imagemin())
-        .pipe(gulp.dest(`${destinationDir}/images`))
-});
-
-gulp.task('project-images', function () {
-  return gulp.src(`${contentDir}/projects/**/images/*.*`)
-        .pipe(changed(destinationDir))
-        .pipe(imagemin())
-        .pipe(rename(function (path) {
-            let sourceName = path.dirname.split('/').shift();
-            path.dirname = `/projects/${sourceName}`;
-            return path;
-          }))
+        .pipe(imagemin({}))
         .pipe(gulp.dest(`${destinationDir}/images`))
 });
 
 gulp.task('page-images', function () {
   return gulp.src(`${contentDir}/pages/**/images/*.*`)
         .pipe(changed(destinationDir))
-        .pipe(imagemin())
+        .pipe(imageResize({
+            width : 1200,
+            imageMagick: true
+        }))
+        .pipe(imagemin({
+            progressive: true 
+        }))
         .pipe(rename(function (path) {
             let sourceName = path.dirname.split('/').shift();
             path.dirname = `/pages/${sourceName}`;
@@ -211,7 +167,7 @@ gulp.task('page-images', function () {
         .pipe(gulp.dest(`${destinationDir}/images`))
 });
 
-gulp.task('images', ['site-images', 'project-images', 'page-images']);
+gulp.task('images', ['site-images', 'page-images']);
 
 gulp.task('public', function () {
   return gulp.src([`${sourceDir}/public/*.*`, `${sourceDir}/public/.*`])

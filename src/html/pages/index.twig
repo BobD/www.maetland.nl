@@ -5,35 +5,33 @@
 {% block main %}
 
 	<style>
+		.js .content__section{
+			display: none;
+		} 
 
 		{% for page in pages %}
-
-			.js .content__section{
-				display: none;
-			} 
-
 			.js .content[data-section="{{page.attributes.id}}"] #{{page.attributes.id}}{
 				display: block;
 			}
-
 		{% endfor %}
-
 	</style>
 
 	<div data-js="content" class="content" id="content">
 		
 		{% for page in pages %}
-			<section class="section content__section {% if loop.first %} active {% endif %}" id="{{page.attributes.id}}">
+			{# {% if page.attributes.sections|length > 0 %} #}
+				<section class="section content__section {% if loop.first %} active {% endif %}" id="{{page.attributes.id}}">
 
-				<header class="section__header">
-					<h{{loop.index}}  class="section__title">{{page.attributes.title}}</h{{loop.index}}>
-				</header>
+					<header class="section__header title title--large">
+						<h{{loop.index}}  class="section__title">{{page.attributes.caption}}</h{{loop.index}}>
+					</header>
 
-				{% for block in page.attributes.sections %}
-					{% embed "components/_block.twig" with {"content": block, "modifiers": "", "index": 0, "id": "" }  %}
-					{% endembed %}
-				{% endfor %}
-			</section>
+					{% for block in page.attributes.sections %}
+						{% embed "components/_block.twig" with {"content": block, "modifiers": "", "index": 0, "id": "" }  %}
+						{% endembed %}
+					{% endfor %}
+				</section>
+			{# {% endif %} #}
 		{% endfor %}
 	
 	</div>
@@ -45,6 +43,6 @@
 	{% include "components/_moodboard.twig" with {"pages": pages} %}
 	
 	<div class="header__nav">
-		<a href="contact.html" class="header__link title">Contact</a>
+		<a data-js="contact-trigger" href="" class="header__link title">Contact</a>
 	</div>
 {% endblock %}

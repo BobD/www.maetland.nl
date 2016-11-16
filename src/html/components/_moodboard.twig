@@ -17,7 +17,7 @@
 			{% spaceless %}
 				{% for page in pages %}
 					<li class="moodboard__info-item title {% if loop.first %}show{% endif %}">
-						{{page.attributes.caption}}
+						{% if not loop.first %}{{page.attributes.title}}{% else %}{% endif %}
 					</li>
 				{% endfor %}
 			{% endspaceless %}
@@ -27,8 +27,15 @@
 	<ul class="moodboard__list">
 		
 		{% for page in pages %}
-			<li class="moodboard__item" style="background-image:url('{{page.attributes.images|first}}')" data-id="{{page.attributes.id}}">
-			</li>
+			{% if page.attributes.id == 'contact' %}
+				<li class="moodboard__item" style="background-image:url('{{page.attributes.images|first}}')" data-id="{{page.attributes.id}}">
+					{% include "components/_contact.twig" with {} %}
+				</li>
+			{% else %}	
+				<li class="moodboard__item" style="background-image:url('{{page.attributes.images|first}}')" data-id="{{page.attributes.id}}">
+				</li>
+			{% endif %}
+
 		{% endfor %}
 
 	</ul>
