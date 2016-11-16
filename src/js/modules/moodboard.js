@@ -27,8 +27,6 @@ class MoodBoard {
 		});
 
 		this.$list.on('beforeChange', (e, slick, currentSlide, nextSlide) => {
-			// log(nextSlide);
-
 			let offsetX = nextSlide * 100;
 		  	Velocity($infoList, {translateZ: 0, translateX: `-${offsetX}%`}, {queue: false, duration: moveDuration});
 
@@ -63,7 +61,7 @@ class MoodBoard {
 	}
 
 	onScroll(e){
-		if(e.wheelDelta < 0){
+		if(e.wheelDelta > 0){
 	    	this.prev();
 	    }else{
 	    	this.next();
