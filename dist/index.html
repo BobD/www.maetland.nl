@@ -14,6 +14,13 @@
         <link rel="stylesheet" href="css/app.css">
         <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
 
+        
+        <meta http-equiv="cache-control" content="max-age=0" />
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="expires" content="0" />
+        <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+        <meta http-equiv="pragma" content="no-cache" />
+
         <!--[if lt IE 9]>
             <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
             <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
@@ -39,24 +46,48 @@
 	<div class="moodboard__info">
 		<ul class="moodboard__info-list">
 			<li class="moodboard__info-item title show"></li><li class="moodboard__info-item title ">
-						De kavels
-					</li><li class="moodboard__info-item title ">
-						Stijl & inspiratie
-					</li><li class="moodboard__info-item title ">
-						De woning
-					</li>		</ul>
+						De kavels					</li><li class="moodboard__info-item title ">
+						Stijl & inspiratie					</li><li class="moodboard__info-item title ">
+						De woning					</li><li class="moodboard__info-item title ">
+						Contact					</li>		</ul>
 	</div>
 	
 	<ul class="moodboard__list">
 		
-					<li class="moodboard__item" style="background-image:url('./images/pages/p1_home/meatland_2.jpg')" data-id="mogelijkheden-en-visie">
-			</li>
-					<li class="moodboard__item" style="background-image:url('./images/pages/p2_kavels/meatland_5.jpg')" data-id="zever-zeer-riante-kavels">
-			</li>
-					<li class="moodboard__item" style="background-image:url('./images/pages/p3_inspiratie/meatland_8.jpg')" data-id="warm-and-aards">
-			</li>
-					<li class="moodboard__item" style="background-image:url('./images/pages/p3_woning/meatland_7.jpg')" data-id="klimaatneutrale-villa">
-			</li>
+						
+				<li class="moodboard__item" style="background-image:url('./images/pages/p1_home/meatland_2.jpg')" data-id="maetland">
+				</li>
+			
+						
+				<li class="moodboard__item" style="background-image:url('./images/pages/p2_kavels/meatland_5.jpg')" data-id="de-kavels">
+				</li>
+			
+						
+				<li class="moodboard__item" style="background-image:url('./images/pages/p3_inspiratie/1_inspiratie.jpg')" data-id="stijl-and-inspiratie">
+				</li>
+			
+						
+				<li class="moodboard__item" style="background-image:url('./images/pages/p3_woning/meatland_7.jpg')" data-id="de-woning">
+				</li>
+			
+									<li class="moodboard__item" style="background-image:url('./images/pages/p4_contact/meatland_2.jpg')" data-id="contact">
+					<div class="contact">
+	
+	<header class="contact__header title title--large ">CONTACT NAAR WENS</header>
+
+	<div class="contact__section">
+		<p>
+			<a href="">Bel direct</a> Met de projectontwikkelaar van landgoed Maetland
+			<a href="" class="label">HANS VERHEIJ - 06 12 345 678</a>
+		</p>
+	</div>
+
+	<div class="contact__section">
+		Formulier volgt nog
+	</div>
+	
+</div>				</li>
+			
 		
 	</ul>
 
@@ -66,62 +97,46 @@
 
 </div>	
 	<div class="header__nav">
-		<a href="contact.html" class="header__link title">Contact</a>
+		<a data-js="contact-trigger" href="" class="header__link title">Contact</a>
 	</div>
         </header>
         
         <main class="main page__main">
             
 	<style>
+		.js .content__section{
+			display: none;
+		} 
 
-		
-			.js .content__section{
-				display: none;
-			} 
-
-			.js .content[data-section="mogelijkheden-en-visie"] #mogelijkheden-en-visie{
+					.js .content[data-section="maetland"] #maetland{
 				display: block;
 			}
-
-		
-			.js .content__section{
-				display: none;
-			} 
-
-			.js .content[data-section="zever-zeer-riante-kavels"] #zever-zeer-riante-kavels{
+					.js .content[data-section="de-kavels"] #de-kavels{
 				display: block;
 			}
-
-		
-			.js .content__section{
-				display: none;
-			} 
-
-			.js .content[data-section="warm-and-aards"] #warm-and-aards{
+					.js .content[data-section="stijl-and-inspiratie"] #stijl-and-inspiratie{
 				display: block;
 			}
-
-		
-			.js .content__section{
-				display: none;
-			} 
-
-			.js .content[data-section="klimaatneutrale-villa"] #klimaatneutrale-villa{
+					.js .content[data-section="de-woning"] #de-woning{
 				display: block;
 			}
-
-		
-	</style>
+					.js .content[data-section="contact"] #contact{
+				display: block;
+			}
+			</style>
 
 	<div data-js="content" class="content" id="content">
 		
-					<section class="section content__section  active " id="mogelijkheden-en-visie">
+					
+				<section class="section content__section  active " id="maetland">
 
-				<header class="section__header">
-					<h1  class="section__title">Mogelijkheden en visie</h1>
-				</header>
+					<header class="section__header title title--large">
+						<h1  class="section__title">Mogelijkheden en visie</h1>
+					</header>
+					
+					1
 
-									
+											
 <div data-js="block" class="block ">
 	
 	<header class="block__header">
@@ -140,7 +155,7 @@
         	</div>
         	</div>
 
-</div>									
+</div>											
 <div data-js="block" class="block closed">
 	
 	<header class="block__header">
@@ -159,7 +174,7 @@
         	</div>
         	</div>
 
-</div>									
+</div>											
 <div data-js="block" class="block closed">
 	
 	<header class="block__header">
@@ -178,7 +193,7 @@
         	</div>
         	</div>
 
-</div>									
+</div>											
 <div data-js="block" class="block closed">
 	
 	<header class="block__header">
@@ -197,14 +212,18 @@
         	</div>
         	</div>
 
-</div>							</section>
-					<section class="section content__section " id="zever-zeer-riante-kavels">
+</div>									</section>
+			
+					
+				<section class="section content__section " id="de-kavels">
 
-				<header class="section__header">
-					<h2  class="section__title">Zever zeer riante kavels</h2>
-				</header>
+					<header class="section__header title title--large">
+						<h2  class="section__title">Zeven zeer riante kavels</h2>
+					</header>
+					
+					1
 
-									
+											
 <div data-js="block" class="block ">
 	
 	<header class="block__header">
@@ -223,7 +242,7 @@
         	</div>
         	</div>
 
-</div>									
+</div>											
 <div data-js="block" class="block closed">
 	
 	<header class="block__header">
@@ -242,14 +261,18 @@
         	</div>
         	</div>
 
-</div>							</section>
-					<section class="section content__section " id="warm-and-aards">
+</div>									</section>
+			
+					
+				<section class="section content__section " id="stijl-and-inspiratie">
 
-				<header class="section__header">
-					<h3  class="section__title">Warm & aards</h3>
-				</header>
+					<header class="section__header title title--large">
+						<h3  class="section__title">Warm & aards</h3>
+					</header>
+					
+					4
 
-									
+											
 <div data-js="block" class="block ">
 	
 	<header class="block__header">
@@ -268,7 +291,7 @@
         	</div>
         	</div>
 
-</div>									
+</div>											
 <div data-js="block" class="block closed">
 	
 	<header class="block__header">
@@ -287,14 +310,18 @@
         	</div>
         	</div>
 
-</div>							</section>
-					<section class="section content__section " id="klimaatneutrale-villa">
+</div>									</section>
+			
+					
+				<section class="section content__section " id="de-woning">
 
-				<header class="section__header">
-					<h4  class="section__title">Klimaatneutrale villa</h4>
-				</header>
+					<header class="section__header title title--large">
+						<h4  class="section__title">Klimaatneutrale villa</h4>
+					</header>
+					
+					1
 
-									
+											
 <div data-js="block" class="block ">
 	
 	<header class="block__header">
@@ -313,7 +340,7 @@
         	</div>
         	</div>
 
-</div>									
+</div>											
 <div data-js="block" class="block closed">
 	
 	<header class="block__header">
@@ -332,40 +359,106 @@
         	</div>
         	</div>
 
-</div>							</section>
+</div>									</section>
+			
+					
+				<section class="section content__section " id="contact">
+
+					<header class="section__header title title--large">
+						<h5  class="section__title">CONTACT NAAR WENS</h5>
+					</header>
+					
+					1
+
+									</section>
+			
 			
 	</div>
 
         </main>
         
         <footer class="footer page__footer">
-
-            <ul class="footer__nav" data-js="footer-nav">
-
-                                    <li class="footer__nav-item" data-id=mogelijkheden-en-visie>
-                        <span class="footer__nav-label title">Volgende Pagina</span>
-                        <span class="footer__nav-divider">|</span>
-                        <a href="#mogelijkheden-en-visie" class="footer__nav-link title">Mogelijkheden en visie</a>
-                    </li>
-                                    <li class="footer__nav-item" data-id=zever-zeer-riante-kavels>
-                        <span class="footer__nav-label title">Volgende Pagina</span>
-                        <span class="footer__nav-divider">|</span>
-                        <a href="#zever-zeer-riante-kavels" class="footer__nav-link title">Zever zeer riante kavels</a>
-                    </li>
-                                    <li class="footer__nav-item" data-id=warm-and-aards>
-                        <span class="footer__nav-label title">Volgende Pagina</span>
-                        <span class="footer__nav-divider">|</span>
-                        <a href="#warm-and-aards" class="footer__nav-link title">Warm & aards</a>
-                    </li>
-                                    <li class="footer__nav-item" data-id=klimaatneutrale-villa>
-                        <span class="footer__nav-label title">Volgende Pagina</span>
-                        <span class="footer__nav-divider">|</span>
-                        <a href="#klimaatneutrale-villa" class="footer__nav-link title">Klimaatneutrale villa</a>
-                    </li>
-                                
-            </ul>
             
+            
+                    
+<style>
+    .js .footer__nav-item{
+        display: none;
+    } 
+
+            .js .page[data-page="maetland"] .footer__nav-item[data-id="maetland"]{
+            display: block;
+        }
+            .js .page[data-page="de-kavels"] .footer__nav-item[data-id="de-kavels"]{
+            display: block;
+        }
+            .js .page[data-page="stijl-and-inspiratie"] .footer__nav-item[data-id="stijl-and-inspiratie"]{
+            display: block;
+        }
+            .js .page[data-page="de-woning"] .footer__nav-item[data-id="de-woning"]{
+            display: block;
+        }
+            .js .page[data-page="contact"] .footer__nav-item[data-id="contact"]{
+            display: block;
+        }
+    </style>
+
+<ul class="footer__nav" data-js="footer-nav">
     
+    
+    
+                                        
+        <li class="footer__nav-item" data-id=maetland>
+            <span class="footer__nav-label title">Volgende Pagina</span>
+            <span class="footer__nav-divider">|</span>
+            <a href="#de-kavels" class="footer__nav-link title">De kavels</a>
+        </li>
+
+         
+
+    
+                                        
+        <li class="footer__nav-item" data-id=de-kavels>
+            <span class="footer__nav-label title">Volgende Pagina</span>
+            <span class="footer__nav-divider">|</span>
+            <a href="#stijl-and-inspiratie" class="footer__nav-link title">Stijl & inspiratie</a>
+        </li>
+
+         
+
+    
+                                        
+        <li class="footer__nav-item" data-id=stijl-and-inspiratie>
+            <span class="footer__nav-label title">Volgende Pagina</span>
+            <span class="footer__nav-divider">|</span>
+            <a href="#de-woning" class="footer__nav-link title">De woning</a>
+        </li>
+
+         
+
+    
+                                        
+        <li class="footer__nav-item" data-id=de-woning>
+            <span class="footer__nav-label title">Volgende Pagina</span>
+            <span class="footer__nav-divider">|</span>
+            <a href="#contact" class="footer__nav-link title">Contact</a>
+        </li>
+
+         
+
+    
+        
+                                
+        <li class="footer__nav-item" data-id=contact>
+            <span class="footer__nav-label title">Volgende Pagina</span>
+            <span class="footer__nav-divider">|</span>
+            <a href="#" class="footer__nav-link title"></a>
+        </li>
+
+         
+
+        
+</ul>            
             <img class="footer__logo" src="./images/maetland-logo-small.svg" alt="" width="35">
 
                             <script src="js/app.bundle.js" charset="utf-8"></script>

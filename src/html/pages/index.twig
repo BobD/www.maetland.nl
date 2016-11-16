@@ -19,19 +19,37 @@
 	<div data-js="content" class="content" id="content">
 		
 		{% for page in pages %}
-			{# {% if page.attributes.sections|length > 0 %} #}
-				<section class="section content__section {% if loop.first %} active {% endif %}" id="{{page.attributes.id}}">
+			
+			{% set pageType = page.attributes.type|default('blocks') %}
+			
+			<section class="section content__section {% if loop.first %} active {% endif %}" id="{{page.attributes.id}}">
 
-					<header class="section__header title title--large">
-						<h{{loop.index}}  class="section__title">{{page.attributes.caption}}</h{{loop.index}}>
-					</header>
+				<header class="section__header title title--large">
+					<h{{loop.index}} class="section__title">{{page.attributes.caption}}</h{{loop.index}}>
+				</header>
+
+				{% if pageType == 'blocks' %}
 
 					{% for block in page.attributes.sections %}
-						{% embed "components/_block.twig" with {"content": block, "modifiers": "", "index": 0, "id": "" }  %}
+						{% embed "components/_block.twig" with {"content": block, "modifiers": "content__item", "index": 0, "id": "" }  %}
 						{% endembed %}
 					{% endfor %}
-				</section>
-			{# {% endif %} #}
+
+				{% else %}
+
+					<div data-js="images" class="images page__images content__item">
+						<div class="images__sizer"></div>
+						{% for image in page.attributes.images %}
+							<div class="images__item">
+								<img src="{{image}}"/>
+							</div>
+						{% endfor %}
+
+					</div>
+
+				{% endif %}
+
+			</section>
 		{% endfor %}
 	
 	</div>

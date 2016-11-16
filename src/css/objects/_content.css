@@ -6,6 +6,10 @@
 	overflow: hidden;
 }
 
+.content__item{
+	margin: 4em 1em;
+}
+
 @media (--small-viewport) {
 	.content{
 		max-width: none;

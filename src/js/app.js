@@ -48,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	});
 
 	moodBoard.on('change', (e) => {
-
 	});
 
 	moodBoard.on('detail', (e) => {
@@ -61,17 +60,18 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
 	footer.on('detail', (e) => {
 		moodBoard.goTo(e.id);
+
 		$('html, body').animate({
           scrollTop: 0
-        }, 250);
-
-		if(e.id != 'contact'){
-        	showDetail(e.id);
-		}else{
-			moodBoard.removeDetail();
-		}
-
+        }, 400, function(){
+			if(e.id != 'contact'){
+	        	showDetail(e.id);
+			}else{
+				moodBoard.removeDetail();
+			}
+        });
 	});
+
 
 	Array.from($sections).forEach(($section) => {
 		let sectionId = $section.getAttribute('id');
@@ -79,8 +79,13 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		sectionStore[sectionId] = blocks;
 	});
 
+
+
+
+
 	function showDetail(id){
 		let $section = document.querySelector(`#${id}`);
+		let $imageSets = $section.querySelectorAll("*[data-js='images']");
 		$content.setAttribute('data-section', id);
 
 		resetBlocks(sectionStore[id]);
@@ -91,6 +96,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		}, 10);
 
 		$page.setAttribute('data-page', id);
+
+		initImages($imageSets);
 	}
 
 	function removeDetail(){
@@ -149,19 +156,36 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		});
 	}
 
+	function initImages($imageSets){
+
+		Array.from($imageSets).forEach(($images) => {
+			// http://masonry.desandro.com/
+			var msnry = new Masonry( $images, {
+			  itemSelector: '.images__item',
+			  columnWidth: '.images__sizer',
+			  percentPosition: true
+			});
+
+			imagesLoaded( $images ).on( 'progress', function() {
+			  	msnry.layout();
+			});
+		});
+
+	}
 
 
 	setTimeout(() => {
 		$page.classList.add('page--init');
 	}, 1000);
 
-		$('html, body').animate({
-          scrollTop: 0
-        }, 250);
+	$('html, body').animate({
+      scrollTop: 0
+    }, 250);
 
 	// Temp
+	// moodBoard.goTo('stijl-and-inspiratie');
 	// moodBoard.detail();
-
+	// showDetail('stijl-and-inspiratie');
 });
 
 

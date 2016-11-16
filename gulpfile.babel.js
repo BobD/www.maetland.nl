@@ -48,8 +48,6 @@ gulp.task('data', () => {
         let config = file.data;
         let data = Object.assign({pages: {}, projects: {}}, config);
         let pages =  glob.sync(`${contentDir}/pages/**/page.md`, {});
-        // let projects =  glob.sync(`${contentDir}/projects/**/*.md`, {});
-        // let files = pages.concat(projects);
         let files = pages;
 
         files.forEach((file) => {
@@ -93,7 +91,7 @@ gulp.task('data', () => {
         _.extend(data, {env: args.env});
         siteData = data;  
 
-        console.log(siteData);
+        console.log(siteData.pages.p3_inspiratie.attributes);
     }));
 
     return stream;

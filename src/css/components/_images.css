@@ -1,0 +1,24 @@
+.images{
+
+}
+
+.images:after {
+  	content: '';
+  	display: block;
+  	clear: both;
+}
+
+.images__sizer,
+.images__item{
+ 	width: 33%;
+}
+
+.images__item{
+ 	float: left;
+ 	padding: .2em;
+}
+
+.images__item img{
+  	display: block;
+  	max-width: 100%;
+}
