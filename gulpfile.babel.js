@@ -9,6 +9,7 @@ import livereload from 'gulp-livereload';
 import data from 'gulp-data';
 import gulpif from 'gulp-if';
 import imagemin from 'gulp-imagemin';
+import image from 'gulp-image';
 import gulpFn from 'gulp-fn';
 import imageResize from 'gulp-image-resize';
 import eventStream from 'event-stream';
@@ -47,7 +48,7 @@ gulp.task('data', () => {
     .pipe(gulpFn((file) => {
         let config = file.data;
         let data = Object.assign({pages: {}, projects: {}}, config);
-        let pages =  glob.sync(`${contentDir}/pages/**/page.md`, {});
+        let pages =  glob.sync(`${contentDir}/pages/**/page.md`, {ignore: `${contentDir}/pages/contact/page.md`});
         let files = pages;
 
         files.forEach((file) => {
@@ -88,16 +89,17 @@ gulp.task('data', () => {
             } catch (err) {}
         });
 
-        _.extend(data, {env: args.env});
+        let siteConfig = fs.readFileSync(`${contentDir}/site.md`, 'utf-8');
+        _.extend(data, {env: args.env, site: frontMatter(siteConfig)});
         siteData = data;  
 
-        console.log(siteData.pages.p3_inspiratie.attributes);
+        console.log(siteData);
     }));
 
     return stream;
 });
 
-gulp.task('pages', () => {
+gulp.task('pages', ['styles'],() => {
     let twig = require('gulp-twig');
 
     return gulp.src(`${sourceDir}/html/pages/**/*.twig`)
@@ -108,7 +110,23 @@ gulp.task('pages', () => {
             return getPageData(pageName);
         }))
         .pipe(twig({
-            base: `${sourceDir}/html/`
+            base: `${sourceDir}/html/`,
+            functions: [
+                {
+                    name: "styles",
+                    func: function (src) {
+                        let styleSource = fs.readFileSync(`${destinationDir}/${src}`, 'utf-8');
+                        return styleSource;
+                    }
+                },
+                {
+                    name: "source",
+                    func: function (src) {
+                        let styleSource = fs.readFileSync(`${src}`, 'utf-8');
+                        return styleSource;
+                    }
+                }
+            ]
         }))
         .pipe(gulp.dest(destinationDir))
         .pipe(livereload({ }));
@@ -151,11 +169,13 @@ gulp.task('page-images', function () {
   return gulp.src(`${contentDir}/pages/**/images/*.*`)
         .pipe(changed(destinationDir))
         .pipe(imageResize({
-            width : 1200,
+            width : 1600,
             imageMagick: true
         }))
-        .pipe(imagemin({
-            progressive: true 
+        .pipe(image({
+            // jpegRecompress: false,
+            // jpegoptim: true,
+            // mozjpeg: true,
         }))
         .pipe(rename(function (path) {
             let sourceName = path.dirname.split('/').shift();
@@ -208,7 +228,7 @@ gulp.task('clean', () => {
 });
 
 
-gulp.task('default', ['public', 'compile', 'styles', 'images']);
+gulp.task('default', ['public', 'images', 'compile']);
 
 
 

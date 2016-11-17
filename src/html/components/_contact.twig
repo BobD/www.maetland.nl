@@ -1,6 +1,11 @@
-<div class="contact">
+<section class="section content__section contact">
 	
-	<header class="contact__header title title--large ">{{page.attributes.caption}}</header>
+	<header class="contact__header">
+		<div class="section__icon">
+			{% include 'components/_scribble-down.twig' %}
+		</div>
+		<h1 class="title title--large">CONTACT NAAR WENS</h1>
+	</header>
 
 	<div class="contact__section">
 		<p>
@@ -9,8 +14,53 @@
 		</p>
 	</div>
 
+	<div class="contact__section contact__section--simple">
+		<div class="title title--large">OF</div>
+	</div>
+
+
 	<div class="contact__section">
-		Formulier volgt nog
+		<p>Kies zelf een geschikt moment</p>
+		
+		<form class="contact__form" id="contact">
+			<label class="contact__label">
+				<span class="contact__form-title">naam</span>
+				<span class="contact__input-container">
+					<input class="contact__input" type="text" name="name"/>
+				</span>
+			</label>
+
+			<label class="contact__label">
+				<span class="contact__form-title">tel.nr</span>
+				<span class="contact__input-container">
+					<input class="contact__input" type="text" name="name"/>
+				</span>
+			</label>
+
+			 <label class="contact__label">
+				<span class="contact__form-title">e-mail</span>
+				<span class="contact__input-container">
+					<input class="contact__input" type="email" name="email"/>
+				</span>
+			</label>
+
+			<br/>
+			<label class="" for="time">
+				<p>U KUNT HIERONDER AANGEVEN OP <a href="">WELKE DAG EN TIJDSTIP</a> U TERUGGEBELD WILT WORDEN</p>
+			</label>
+
+			 <div class="contact__label contact__label--textarea">
+				<textarea id="time" class="contact__textarea" type="email" name="time" rows="8"></textarea>
+			</div>
+
+			<button class="contact__submit" type="submit" form="contact" value="Submit">
+				<span class="contact__submit-label">Verstuur</span>
+				<span class="contact__submit-icon">
+					{% include 'components/_chevron-right.twig' %}
+				</span>
+			</button>
+
+		</form>
 	</div>
 	
-</div>
+</section>

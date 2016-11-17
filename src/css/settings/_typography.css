@@ -47,7 +47,7 @@
 	--ms-9  : calc(var(--ms-8) / var(--ms-ratio));
 	--ms-10 : calc(var(--ms-9) / var(--ms-ratio));
 
-	--ms-ratio : var(--golden);
+	--ms-ratio : var(--fourth);
 	--ms-base  : 1rem;
 }
 

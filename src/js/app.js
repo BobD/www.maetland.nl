@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	let $sections = document.querySelectorAll(".content__section");
 	let $contentContainer =  document.querySelector("*[data-js='content']");
 	let $scrollTrigger =  document.querySelector("*[data-js='scroll-trigger']");
-	let $contactTrigger =  document.querySelector("*[data-js='contact-trigger']");
 	let sectionStore = {};
 
 	$html.classList.remove('no-js');
@@ -34,12 +33,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
 	$scrollTrigger.addEventListener('click', (e) => {
 		moodBoard.detail();
-		e.preventDefault();
-	});	
-
-	$contactTrigger.addEventListener('click', (e) => {
-		moodBoard.removeDetail();
-		moodBoard.goTo('contact');
 		e.preventDefault();
 	});	
 
@@ -98,6 +91,15 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		$page.setAttribute('data-page', id);
 
 		initImages($imageSets);
+
+		var target = $('#content');
+      	if (target.length) {
+        	$('html, body').delay( 1000 ).animate({
+          		scrollTop: target.offset().top
+        	}, 1500);
+      	}
+
+		// history.set(id);
 	}
 
 	function removeDetail(){
@@ -172,7 +174,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		});
 
 	}
-
 
 	setTimeout(() => {
 		$page.classList.add('page--init');

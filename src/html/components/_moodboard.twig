@@ -29,7 +29,7 @@
 		{% for page in pages %}
 			{% if page.attributes.id == 'contact' %}
 				<li class="moodboard__item" style="background-image:url('{{page.attributes.images|first}}')" data-id="{{page.attributes.id}}">
-					{% include "components/_contact.twig" with {} %}
+					{# {% include "components/_contact.twig" with {} %} #}
 				</li>
 			{% else %}	
 				<li class="moodboard__item" style="background-image:url('{{page.attributes.images|first}}')" data-id="{{page.attributes.id}}">
@@ -41,7 +41,7 @@
 	</ul>
 
 	<a href="#content" data-js="scroll-trigger" class="moodboard__scroll">
-		<i class="fa fa-angle-down"></i>
+		{% include 'components/_scribble-right.twig' %}
 	</a>
 
 </div>

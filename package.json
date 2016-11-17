@@ -34,6 +34,7 @@
     "gulp-data": "^1.2.1",
     "gulp-fn": "0.0.0",
     "gulp-if": "^2.0.1",
+    "gulp-image": "^2.7.2",
     "gulp-image-resize": "^0.10.0",
     "gulp-imagemin": "^3.0.3",
     "gulp-livereload": "^3.8.1",

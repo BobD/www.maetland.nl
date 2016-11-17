@@ -1,66 +1,91 @@
-{% set page_modifier = 'page--home' %}
+{% set page_modifier = 'page page--home' %}
 
 {% extends "layouts/_site.twig" %}
 
 {% block main %}
 
-	<style>
-		.js .content__section{
-			display: none;
-		} 
+    <main class="main page__main">
 
-		{% for page in pages %}
-			.js .content[data-section="{{page.attributes.id}}"] #{{page.attributes.id}}{
-				display: block;
-			}
-		{% endfor %}
-	</style>
+		<style>
+			.js .content__section{
+				display: none;
+			} 
 
-	<div data-js="content" class="content" id="content">
-		
-		{% for page in pages %}
+			{% for page in pages %}
+				.js .content[data-section="{{page.attributes.id}}"] #{{page.attributes.id}}{
+					display: block;
+				}
+			{% endfor %}
+		</style>
+
+		<div data-js="content" class="content" id="content">
 			
-			{% set pageType = page.attributes.type|default('blocks') %}
-			
-			<section class="section content__section {% if loop.first %} active {% endif %}" id="{{page.attributes.id}}">
+			{% for page in pages %}
+				
+				{% set pageType = page.attributes.type|default('blocks') %}
+				
+				<section class="section content__section {% if loop.first %} active {% endif %}" id="{{page.attributes.id}}">
 
-				<header class="section__header title title--large">
-					<h{{loop.index}} class="section__title">{{page.attributes.caption}}</h{{loop.index}}>
-				</header>
+					<header class="section__header title title--large">
+						<div class="section__icon">
+							{% include 'components/_scribble-down.twig' %}
+						</div>
+						<h{{loop.index}} class="section__title">{{page.attributes.caption}}</h{{loop.index}}>
+					</header>
 
-				{% if pageType == 'blocks' %}
+					{% if pageType == 'blocks' %}
 
-					{% for block in page.attributes.sections %}
-						{% embed "components/_block.twig" with {"content": block, "modifiers": "content__item", "index": 0, "id": "" }  %}
-						{% endembed %}
-					{% endfor %}
-
-				{% else %}
-
-					<div data-js="images" class="images page__images content__item">
-						<div class="images__sizer"></div>
-						{% for image in page.attributes.images %}
-							<div class="images__item">
-								<img src="{{image}}"/>
-							</div>
+						{% for block in page.attributes.sections %}
+							{% embed "components/_block.twig" with {"content": block, "modifiers": "content__item", "index": 0, "id": "" }  %}
+							{% endembed %}
 						{% endfor %}
 
-					</div>
+					{% else %}
 
-				{% endif %}
+						<div data-js="images" class="images page__images content__item">
+							<div class="images__sizer"></div>
+							{% for image in page.attributes.images %}
+								<div class="images__item">
+									<img src="{{image}}"/>
+								</div>
+							{% endfor %}
 
-			</section>
-		{% endfor %}
-	
-	</div>
+						</div>
+
+					{% endif %}
+
+				</section>
+			{% endfor %}
+		
+		</div>
+
+	</main>
 
 {% endblock %}
 
 {# Somehow placing this block above the main block does not work? Weird.. #}
 {% block header %}
-	{% include "components/_moodboard.twig" with {"pages": pages} %}
+     <header data-js="header" class="header header--full page__header">
+     	{% include "components/_moodboard.twig" with {"pages": pages} %}
 	
-	<div class="header__nav">
-		<a data-js="contact-trigger" href="" class="header__link title">Contact</a>
-	</div>
+		<div class="header__nav">
+			<a href="contact.html" class="header__link title">Contact</a>
+		</div>
+     </header>
+{% endblock %}
+
+
+{% block footer %}
+    <footer class="footer page__footer">
+        
+    {% include "components/_footer-nav.twig" with {"pages": pages} %}
+    
+    <img class="footer__logo" src="./images/maetland-logo-small.svg" alt="" width="35">
+
+    <script src="js/app.bundle.js" charset="utf-8"></script>
+
+    {% if env == 'development' %}
+        <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+    {% endif %}
+        
 {% endblock %}

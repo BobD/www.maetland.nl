@@ -20,7 +20,7 @@ class MoodBoard {
 		// http://kenwheeler.github.io/slick/
 		this.$list.slick({
 			slide: '.moodboard__item',
-			// appendArrows: false,
+			appendArrows: false,
 			speed: moveDuration,
 			// infinite: false,
 			draggable: false

@@ -21,7 +21,6 @@ p{
         text-decoration: none;
         position: relative;
 
-
         &:after{
             content: '';
             display: block;
@@ -29,7 +28,7 @@ p{
             top: 90%;
             left: -1%;
             right: -1%;
-            height: 2px;
+            height: 1px;
             width: 100%;
             background: currentColor;
             transition: width .5s ease .5s;

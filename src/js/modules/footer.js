@@ -4,8 +4,7 @@ class Footer {
 
 	constructor(config){
 		this.eventEmitter = new Events.EventEmitter();
-		let $nav = document.querySelector("*[data-js='footer-nav']");
-		let $links = $nav.getElementsByClassName("footer__nav-link");
+		let $links = document.querySelectorAll("*[data-js='footer-trigger'");
 
 		Array.from($links).forEach(($link) => {
 			let href = $link.getAttribute('href');

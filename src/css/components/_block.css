@@ -11,8 +11,11 @@
 	color: white;
 	text-align: center;
 	user-select: none;
-	padding: .75em;
+	line-height: 3;
+	position: relative;
 	letter-spacing: .05em;
+	overflow: hidden;
+	transition: all .4s ease;
 }
 
 .block__title{
@@ -24,17 +27,23 @@
 }
 
 .block__icon{
-	font-size: 1.5em;
+	position: absolute;
+	text-align: center;
+	top: 4em;
+	display: inline-block;
+	font-size: 1em;
+	width: 1em;
+	color: inherit;
 	line-height: 1;
-	max-height: 0;
-	overflow: hidden;
-	transition: max-height ease .5s;
+
+	transition: all .25s ease;
+	opacity: .5;
 }
 
 .block__content-container{
 	max-height: 10em;
 	overflow: hidden;
-	transition: max-height ease .5s;
+	transition: max-height .4s ease .25s;
 }
 
 .block__content{
@@ -45,12 +54,12 @@
 	&.closed{
 
 		& .block__header{
-			padding: 1em;
 			cursor: pointer;
+			line-height: 6;
 		}
 
-		& .block__icon{
-			max-height: 1em;
+		& .block--icon{
+			opacity: 0;
 		}
 
 		& .block__content-container{

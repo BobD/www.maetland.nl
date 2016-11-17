@@ -1,5 +1,4 @@
 .page{
-	overflow: hidden;
 }
 
 .page__header{
@@ -14,11 +13,14 @@
 .page__footer{
 }
 
+.js .page{
+	overflow: hidden;
+}
 
 .js .page__header{
 }
 
-.js  .page__main{
+.js .page__main{
 }
 
 .js .page--detail{
@@ -27,4 +29,10 @@
 
 .js .page--detail .page__header{
 	position: relative;
+}
+
+@media (--small-viewport) {
+	.js .page{
+		/*overflow: auto;*/
+	}
 }

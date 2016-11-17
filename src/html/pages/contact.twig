@@ -1,0 +1,30 @@
+{% set page_modifier = 'page page--contact' %}
+
+{% extends "layouts/_site.twig" %}
+
+{% block main %}
+	<main class="main">
+		{% include "components/_contact.twig" with {} %}
+	</main>
+{% endblock %}
+
+{% block footer %}
+    <footer class="footer page__footer">
+        
+    	<ul class="footer__nav">
+			<li class="footer__nav-item" data-id={{page.attributes.id}}>
+	            <span class="footer__nav-label title">Terug naar</span>
+	            <span class="footer__nav-divider">|</span>
+	            <a href="index.html" class="footer__nav-link title">Home</a>
+	        </li>
+    	</ul>
+    
+    <img class="footer__logo" src="./images/maetland-logo-small.svg" alt="" width="35">
+
+    {# <script src="js/contact.bundle.js" charset="utf-8"></script> #}
+
+    {% if env == 'development' %}
+        <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+    {% endif %}
+        
+{% endblock %}

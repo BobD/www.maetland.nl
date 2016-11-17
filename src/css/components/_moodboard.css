@@ -12,7 +12,7 @@
 	height: 100%;
 	width: var(--moodboard-header-width);
 	position: absolute;
-	background: black;
+	background: var(--color-black);
 	z-index: 1;
 
 	left: var(--moodboard-offet-left);
@@ -21,6 +21,10 @@
 
 .moodboard__header{
 	text-align: center;
+}
+
+.moodboard__logo-link{
+	
 }
 
 .moodboard__logo{
@@ -40,6 +44,7 @@
 	text-transform: uppercase;
 	text-decoration: none;
 	cursor: pointer;
+	font-size: var(--ms-1);
 
 	transition: opacity .5s ease;
 	opacity: 0;
@@ -63,28 +68,26 @@
 
 
 @keyframes bounce {
-    0% {transform: translateY(0);}
-    50% {transform: translateY(50%);}
-    100% {transform: translateY(0);}
+    0% {transform: translateY(0) rotate(0);}
+    50% {transform: translateY(0) rotate(90deg);}
+    75% {transform: translateY(75%) rotate(90deg);}
+    100% {transform: translateY(50%) rotate(90deg);}
 }
 
 
 .moodboard__scroll{
+	width: 1em;
 	position: absolute;
-	right: 6rem;
-	bottom: 2rem;
+	right: 4rem;
+	bottom: 3rem;
 	text-decoration: none;
 	color: white;
-	font-size: 3rem;
 	line-height: 1;
 	opacity: 0;
 	transition: all .5s ease;
-	z-index: 10;
+	transform: scale(1);
+	z-index: 4;
 
-	&:hover{
-		transform: scale(1.35);
-		transform-origin: center center;
-	}
 }
 
 .moodboard__back{
@@ -136,7 +139,7 @@
 	display: inline-block;
 	width: 100%;
 	text-transform: uppercase;
-	font-size: var(--ms1);
+	font-size: var(--ms2);
 	opacity: 0;
 	transition: opacity ease .25s;
 	font-weight: bold;
@@ -218,8 +221,14 @@
 .page--detail .moodboard__scroll{
 	animation-name: bounce;
 	animation-duration: 1.5s;
-	animation-iteration-count: 2;
+	animation-iteration-count: 1;
 	animation-timing-function: ease-out;
+	animation-fill-mode: forwards;
+
+	&:hover{
+		transform: scale(1.25);
+		transform-origin: center center;
+	}
 }
 
 .page--detail .moodboard__caption{
@@ -229,9 +238,50 @@
 
 .page--detail .moodboard__item{
 	left:  calc(var(--moodboard-header-width) - 2px);
-	/*right: var(--moodboard-header-width);*/
 }
 
+
+
+
+@media (--small-viewport) {
+	.moodboard{
+		width: 100%;
+		top: 0;
+		right: 0;
+		left: 0;
+	}
+
+	.moodboard__header, 
+	.moodboard__info{
+		left: auto;
+		width: 100%;
+	}
+
+	.moodboard__header{
+		position: relative;
+		margin-top: -1px;
+		height: auto;
+		padding: 1em;
+	}
+
+	.moodboard__info{
+
+	}
+
+	.moodboard__item{
+		left: 0;
+	}
+
+	.moodboard__logo{
+		opacity: 1 !important;
+		position: relative;
+		top: auto;
+		left: auto;
+		margin-top: 0;
+		transform: none;
+		width: 6em;
+	}
+}
 
 
 /* Slick overides */
@@ -243,7 +293,7 @@
 	height: 100%;
 }
 
-.slick-arrow{
+/*.slick-arrow{
     position: absolute;
     top: 50%;
     z-index: 10;
@@ -260,8 +310,6 @@
 
     transition: all ease .5s;
 
-
-    /* Apply Awesome fonts */
     font-family: FontAwesome;
 }
 
@@ -305,4 +353,4 @@
 
 .slick-next {
     right: 1rem;
-}
+}*/

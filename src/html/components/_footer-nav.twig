@@ -1,7 +1,7 @@
-{% set navItems = [] %}
+{% set pagesArray = [] %}
 
 {% for page in pages %}
-    {% set navItems = navItems|merge([page]) %}
+    {% set pagesArray = pagesArray|merge([page]) %}
 {% endfor %}
 
 <style>
@@ -9,36 +9,36 @@
         display: none;
     } 
 
-    {% for page in navItems %}
+    {% for page in pagesArray %}
         .js .page[data-page="{{page.attributes.id}}"] .footer__nav-item[data-id="{{page.attributes.id}}"]{
             display: block;
         }
     {% endfor %}
 </style>
 
-<ul class="footer__nav" data-js="footer-nav">
+<ul class="footer__nav">
     
-    {% set nextPage = navItems[1] %}
+    {% set nextPage = pagesArray[1] %}
 
-    {% for page in navItems %}
+    {% for page in pagesArray %}
 
         {% if nextPage is empty %}
-{#             {% set nextPageTitle = 'Inschrijven' %}
-            {% set nextPageUrl = 'contact' %} #}
-            {% set nextPageTitle = nextPage[0].attributes.title %}
-            {% set nextPageId = nextPage[0].attributes.id %}
+            {% set nextPageTitle = 'Inschrijven' %}
+            {% set nextPageId = 'contact.html' %}
+            {% set trigger = '' %}
         {% else %}
             {% set nextPageTitle = nextPage.attributes.title %}
-            {% set nextPageId = nextPage.attributes.id %}
+            {% set nextPageId = '#' ~ nextPage.attributes.id %}
+            {% set trigger = 'footer-trigger' %}
         {% endif %}
 
         <li class="footer__nav-item" data-id={{page.attributes.id}}>
             <span class="footer__nav-label title">Volgende Pagina</span>
             <span class="footer__nav-divider">|</span>
-            <a href="#{{nextPageId}}" class="footer__nav-link title">{{nextPageTitle}}</a>
+            <a data-js="{{trigger}}" href="{{nextPageId}}" class="footer__nav-link title">{{nextPageTitle}}</a>
         </li>
 
-        {% set nextPage = navItems[loop.index + 1] %} 
+        {% set nextPage = pagesArray[loop.index + 1] %} 
 
     {% endfor %}
     
