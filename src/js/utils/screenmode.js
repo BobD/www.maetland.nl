@@ -1,29 +1,38 @@
+import Events from 'events';
+
 class ScreenMode {
 
 	constructor(){
+		this.eventEmitter = new Events.EventEmitter();
+
+		window.addEventListener('resize', () => {
+			this.onWindowResize();
+		});
+
+		this.onWindowResize();
+	}
+
+	on(){
+		this.eventEmitter.on.apply(this.eventEmitter, arguments);
+	}
+
+	onWindowResize(){
+		let screenMode = this.getScreenMode();
+		this.eventEmitter.emit('change', {
+			mode: screenMode
+		});
+	}
+
+	getScreenMode(){
 		let modifiers = [];
 
-		if(this.isMobile()){
-			modifiers.push('is-mobile');
-		}
-
-		if(this.isMobileiOS()){
-			modifiers.push('is-ios');
-		}
-
-		if(this.isTablet()){
-			modifiers.push('is-tablet');
-		}
-
-		if(!this.isMobile() && !this.isTablet()){
-			modifiers.push('is-desktop');
-		}
-
 		return {
-			modifiers: modifiers,
 			isMobile: this.isMobile(),
 			isMobileiOS: this.isMobileiOS(),
-			isTablet: this.isTablet()
+			isTablet: this.isTablet(),
+			isTabletLandscape: this.isTabletLandscape(),
+			isTabletPortrait: this.isTabletPortrait(),
+			isMinimal: (this.isMobile() || this.isTabletPortrait())
 		}
 	}
 
@@ -34,6 +43,16 @@ class ScreenMode {
 	}
 
 	isTablet(){
+		let isTablet = window.matchMedia("only screen and (min-width: 768px) and (max-width: 1024px)");
+		return isTablet.matches;
+	}
+
+	isTabletLandscape(){
+		let isTablet = window.matchMedia("only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape)");
+		return isTablet.matches;
+	}
+
+	isTabletPortrait(){
 		let isTablet = window.matchMedia("only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait)");
 		return isTablet.matches;
 	}

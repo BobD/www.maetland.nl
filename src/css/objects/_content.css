@@ -6,14 +6,22 @@
 	overflow: hidden;
 }
 
+.content__section{
+
+}
+
 .content__item{
 	margin: 4em 1em;
 }
 
-@media (--small-viewport) {
+@media (--minimal-viewport) {
 	.content{
 		max-width: none;
 		width: auto;
 		padding: 0;
+	}
+
+	.content__item{
+		margin: 4em 0;
 	}
 }

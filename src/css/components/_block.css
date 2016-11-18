@@ -41,7 +41,7 @@
 }
 
 .block__content-container{
-	max-height: 10em;
+	max-height: 50em;
 	overflow: hidden;
 	transition: max-height .4s ease .25s;
 }
@@ -52,7 +52,6 @@
 
 .block{
 	&.closed{
-
 		& .block__header{
 			cursor: pointer;
 			line-height: 6;
@@ -66,4 +65,15 @@
 			max-height: 0;
 		}
 	}	
+}
+
+@media (--minimal-viewport) {
+
+	.block__header{
+		padding: .5em 0;
+	}
+
+	.block__title{
+		line-height: 2;
+	}
 }

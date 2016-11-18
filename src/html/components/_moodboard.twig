@@ -17,7 +17,7 @@
 			{% spaceless %}
 				{% for page in pages %}
 					<li class="moodboard__info-item title {% if loop.first %}show{% endif %}">
-						{% if not loop.first %}{{page.attributes.title}}{% else %}{% endif %}
+						<a class="moodboard__info-link" href="#{{page.attributes.id}}">{{page.attributes.title}}</a>
 					</li>
 				{% endfor %}
 			{% endspaceless %}

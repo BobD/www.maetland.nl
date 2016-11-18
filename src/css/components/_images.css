@@ -22,3 +22,17 @@
   	display: block;
   	max-width: 100%;
 }
+
+@media (--small-viewport) {
+	.images__sizer,
+	.images__item{
+	 	width: 100%;
+	}
+}
+
+@media (--medium-viewport) {
+	.images__sizer,
+	.images__item{
+	 	width: 50%;
+	}
+}

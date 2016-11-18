@@ -48,3 +48,13 @@
 .page--detail{
 	
 }
+
+
+@media (--minimal-viewport) {
+
+	.header__nav{
+		top: 1.25em;
+		width: 6em;
+		z-index: 1;
+	}
+}

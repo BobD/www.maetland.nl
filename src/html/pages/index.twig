@@ -11,6 +11,10 @@
 				display: none;
 			} 
 
+			.js .page[data-page="all"] .content__section{
+		        display: block;
+		    }
+
 			{% for page in pages %}
 				.js .content[data-section="{{page.attributes.id}}"] #{{page.attributes.id}}{
 					display: block;

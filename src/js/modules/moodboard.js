@@ -12,7 +12,7 @@ class MoodBoard {
 		this.$back = this.$container.find('.moodboard__back');
 		this.scrollHandler = this.onScroll.bind(this);
 		this.lock = false;
-
+		let mode = config.mode;
 		let $info = this.$container.find('.moodboard__info');
 		let $infoList = this.$container.find('.moodboard__info-list');
 		let moveDuration = 650;
@@ -20,9 +20,8 @@ class MoodBoard {
 		// http://kenwheeler.github.io/slick/
 		this.$list.slick({
 			slide: '.moodboard__item',
-			appendArrows: false,
+			// appendArrows: false,
 			speed: moveDuration,
-			// infinite: false,
 			draggable: false
 		});
 
@@ -54,6 +53,7 @@ class MoodBoard {
 		});
 
 		this.maximize();
+		this.setMode(mode);
 	}
 
 	on(){
@@ -88,19 +88,17 @@ class MoodBoard {
 		this.addScroll();
 	}
 
-	minimize(){
-		this.eventEmitter.emit('minimize', {});
-		this.$container.removeClass('moodboard--maximize');
+	detail(){
+		this.eventEmitter.emit('detail', {
+			id: this.getDetailId()
+		});
 		this.removeScroll();
 	}
 
-	detail(){
+	getDetailId(){
 		let currentIndex = 	this.$list.slick('slickCurrentSlide');
 		let detailId = this.$list.find('.moodboard__item').eq(currentIndex + 1).attr('data-id');
-		this.eventEmitter.emit('detail', {
-			id: detailId
-		});
-		this.removeScroll();
+		return detailId;
 	}
 
 	goTo(id){
@@ -121,6 +119,26 @@ class MoodBoard {
 	removeScroll(){
 		window.removeEventListener('mousewheel', this.scrollHandler);
 		window.removeEventListener('DOMMouseScroll', this.scrollHandler);
+	}
+
+	mobileMode(){
+		if(this.mode != 'mobile'){
+			log('mobile');
+			this.mode = 'mobile';
+		}
+
+	}
+
+	setMode(mode){
+		if(this.mode != mode){
+			if(mode == 'mobile'){
+				this.removeScroll();
+			}else{
+				this.addScroll();
+			}
+
+			this.mode = mode;
+		}
 	}
 
 }

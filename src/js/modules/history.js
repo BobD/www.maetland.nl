@@ -10,12 +10,18 @@ class History {
 
 		// const location = history.location;
 		const unlisten = this.history.listen((location, action) => {
+			this.eventEmitter.emit('change', {
+	  			id: this.history.location.hash
+	  		});
 		});
-		// this.history.push('/home', {})
+
+		this.eventEmitter.emit('change', {
+	  		id: this.history.location.hash
+	  	});
 	}
 
 	set(id){
-		this.history.push(`/${id}`, {})
+		this.history.push(`${id}`, {});
 	}
 
 	on(){

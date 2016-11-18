@@ -17,7 +17,33 @@
 .section__title{
 }
 
-@media (--small-viewport) {
+@media (--minimal-viewport) {
+	.section{
+		margin: 0;
+		padding: 2em 1em;
+		border-bottom: thin dashed var(--color-black);
+	}
+
+	.section:last-child{
+		border-bottom: 0;
+	}
+
+	.section__header{
+		margin-top: 1em;
+	}
+
+	.section__icon{
+		display: none;
+	}
+}
+
+@media (--medium-portrait-viewport) {
+	.section{
+		margin: 1em;
+	}
+}
+
+@media (--medium-landscape-viewport) {
 	.section{
 		margin: 0;
 	}

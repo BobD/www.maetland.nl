@@ -11,8 +11,11 @@ window.log = log;
 
 document.addEventListener("DOMContentLoaded", function(e) {
 	let history = new History();
-	let moodBoard = new MoodBoard();
 	let screenMode = new ScreenMode();
+	let mode = screenMode.getScreenMode();
+	let moodBoard = new MoodBoard({
+		mode: (mode.isMobile || mode.isTabletPortrait) ? 'mobile' : 'desktop'
+	});
 	let footer = new Footer();
 	let $html = document.querySelector('html');
 	let $body = document.querySelector('body');
@@ -27,12 +30,25 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	$html.classList.remove('no-js');
 	$html.classList.add('js');
 
-	screenMode.modifiers.forEach((modifier) =>{
-		$html.classList.add(modifier);
+	history.on('change', (e) => {
+		showDetail(e.id)
+	})
+
+	applyScreenMode(mode);
+	screenMode.on('change', (e) => {
+		applyScreenMode(e.mode);
+		moodBoard.setMode((mode.isMobile || mode.isTabletPortrait) ? 'mobile' : 'desktop');
 	});
 
 	$scrollTrigger.addEventListener('click', (e) => {
-		moodBoard.detail();
+		if(mode.isMinimal){
+			let id = moodBoard.getDetailId();
+			scrollTo(`#${id}`);
+		}else{
+			moodBoard.detail();
+			scrollTo('#content', 1500, 1000);
+		}
+
 		e.preventDefault();
 	});	
 
@@ -52,19 +68,16 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	});
 
 	footer.on('detail', (e) => {
-		moodBoard.goTo(e.id);
+		if(mode.isMinimal){
+			scrollTo(`#${e.id}`);
+		}else{
+			moodBoard.goTo(e.id);
 
-		$('html, body').animate({
-          scrollTop: 0
-        }, 400, function(){
-			if(e.id != 'contact'){
-	        	showDetail(e.id);
-			}else{
-				moodBoard.removeDetail();
-			}
-        });
+			scrollTo('#top', 400, 0, () => {
+				showDetail(e.id);
+			});
+		}
 	});
-
 
 	Array.from($sections).forEach(($section) => {
 		let sectionId = $section.getAttribute('id');
@@ -72,9 +85,15 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		sectionStore[sectionId] = blocks;
 	});
 
-
-
-
+	function applyScreenMode(mode){
+		(mode.isMobile) ? $html.classList.add('is-mobile') : $html.classList.remove('is-mobile');
+		(mode.isMobileiOS) ? $html.classList.add('is-ios') : $html.classList.remove('is-ios');
+		(mode.isTablet) ? $html.classList.add('is-tablet') : $html.classList.remove('is-tablet');
+		(mode.isTabletLandscape) ? $html.classList.add('is-tablet-landscape') : $html.classList.remove('is-tablet-landscape');
+		(mode.isTabletPortrait) ? $html.classList.add('is-tablet-portrait') : $html.classList.remove('is-tablet-portrait');
+		(mode.isMinimal) ? $html.classList.add('is-minimal') : $html.classList.remove('is-minimal');
+		(!mode.isMobile && !mode.isTablet) ? $html.classList.add('is-desktop') : $html.classList.remove('is-desktop');
+	}
 
 	function showDetail(id){
 		let $section = document.querySelector(`#${id}`);
@@ -91,24 +110,15 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		$page.setAttribute('data-page', id);
 
 		initImages($imageSets);
-
-		var target = $('#content');
-      	if (target.length) {
-        	$('html, body').delay( 1000 ).animate({
-          		scrollTop: target.offset().top
-        	}, 1500);
-      	}
-
-		// history.set(id);
+		// history.set(`/#${id}`);
 	}
 
 	function removeDetail(){
 		$content.setAttribute('data-section', '');
 		$page.classList.remove('page--detail');
+        scrollTo('#top', 500);
 
-		$('html, body').animate({
-          scrollTop: 0
-        }, 500);
+        history.set('');
 	}
 
 	function initBlocks($section){
@@ -175,18 +185,24 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
 	}
 
+	function scrollTo(id, speed = 250, delay = 0, callback){
+		let target = $(`${id}`);
+      	if (target.length) {
+        	$('html, body').delay( delay ).animate({
+          		scrollTop: target.offset().top
+        	}, speed, callback);
+      	}
+	}
+
 	setTimeout(() => {
 		$page.classList.add('page--init');
 	}, 1000);
 
-	$('html, body').animate({
-      scrollTop: 0
-    }, 250);
+    scrollTo('#top', 250);
 
 	// Temp
-	// moodBoard.goTo('stijl-and-inspiratie');
+	// showDetail('de-kavels');
 	// moodBoard.detail();
-	// showDetail('stijl-and-inspiratie');
 });
 
 

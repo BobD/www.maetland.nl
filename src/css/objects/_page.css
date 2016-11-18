@@ -31,8 +31,8 @@
 	position: relative;
 }
 
-@media (--small-viewport) {
+@media (--minimal-viewport) {
 	.js .page{
-		/*overflow: auto;*/
+		overflow: auto;
 	}
 }

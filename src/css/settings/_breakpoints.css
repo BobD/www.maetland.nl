@@ -1,5 +1,7 @@
-@custom-media --small-viewport (max-width: 375px);
+@custom-media --small-viewport (max-width: 736px);
 @custom-media --medium-viewport (min-width: 736.1px) and (max-width: 1024px);
 @custom-media --medium-portrait-viewport (min-width: 768px) and (max-width: 1024px) and (orientation: portrait);
 @custom-media --medium-landscape-viewport (min-width: 768px) and (max-width: 1024px) and (orientation: landscape);
 @custom-media --desktop-viewport (min-width: 1024px);
+
+@custom-media --minimal-viewport (max-width: 736px), (min-width: 768px) and (max-width: 1024px) and (orientation: portrait);

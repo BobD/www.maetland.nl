@@ -52,3 +52,23 @@
 .footer__logo{
 
 }
+
+@media (--minimal-viewport) {
+    .footer{
+        padding: 2em 0em;
+    }
+
+    .footer__nav{
+        /*font-size: var(--ms-1);*/
+    }
+
+    .footer__nav-label,
+    .footer__nav-divider{
+        display: none;
+    }
+
+    .footer__nav-item{
+        margin-bottom: .5em;
+    }
+}
+

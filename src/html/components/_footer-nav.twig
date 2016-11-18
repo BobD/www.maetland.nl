@@ -9,6 +9,10 @@
         display: none;
     } 
 
+    .js .page[data-page="all"] .footer__nav-item{
+        display: block;
+    }
+
     {% for page in pagesArray %}
         .js .page[data-page="{{page.attributes.id}}"] .footer__nav-item[data-id="{{page.attributes.id}}"]{
             display: block;
