@@ -10,7 +10,7 @@ import Footer from './modules/footer';
 window.log = log;
 
 document.addEventListener("DOMContentLoaded", function(e) {
-	let history = new History();
+	let history = new History();	
 	let screenMode = new ScreenMode();
 	let mode = screenMode.getScreenMode();
 	let moodBoard = new MoodBoard({
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	});
 	let footer = new Footer();
 	let $html = document.querySelector('html');
-	let $body = document.querySelector('body');
+	let $body = document.querySelector('body');	
 	let $page = document.querySelector('.page');
 	let $content = document.querySelector('.content');
 	let $header = document.querySelector("*[data-js='header']");
@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	let $contentContainer =  document.querySelector("*[data-js='content']");
 	let $scrollTrigger =  document.querySelector("*[data-js='scroll-trigger']");
 	let sectionStore = {};
+
 
 	$html.classList.remove('no-js');
 	$html.classList.add('js');
