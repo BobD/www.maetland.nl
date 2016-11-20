@@ -1,3 +1,14 @@
+<svg style="display:none;">
+  <defs>
+    <g id="chevron-right">
+		<path  style="fill:currentColor;stroke:none;transform:rotate(-90deg);transform-origin: center center;" d="M0 307.2c0-6.552 2.499-13.102 7.499-18.101 9.997-9.998 26.206-9.998 36.203 0l442.698 442.698 442.699-442.698c9.997-9.998 26.206-9.998 36.203 0s9.998 26.206 0 36.203l-460.8 460.8c-9.997 9.998-26.206 9.998-36.203 0l-460.8-460.8c-5-5-7.499-11.55-7.499-18.102z"></path>
+    </g>
+    <g id="chevron-left" >
+		<path  style="fill:currentColor;stroke:none;transform:rotate(90deg);transform-origin: center center;" d="M0 307.2c0-6.552 2.499-13.102 7.499-18.101 9.997-9.998 26.206-9.998 36.203 0l442.698 442.698 442.699-442.698c9.997-9.998 26.206-9.998 36.203 0s9.998 26.206 0 36.203l-460.8 460.8c-9.997 9.998-26.206 9.998-36.203 0l-460.8-460.8c-5-5-7.499-11.55-7.499-18.102z"></path>
+    </g>
+  </defs>
+</svg>
+
 <div data-js="moodboard" class="moodboard moodboard--maximize">
 
 	<div class="moodboard__header">
@@ -27,15 +38,7 @@
 	<ul class="moodboard__list">
 		
 		{% for page in pages %}
-			{% if page.attributes.id == 'contact' %}
-				<li class="moodboard__item" style="background-image:url('{{page.attributes.images|first}}')" data-id="{{page.attributes.id}}">
-					{# {% include "components/_contact.twig" with {} %} #}
-				</li>
-			{% else %}	
-				<li class="moodboard__item" style="background-image:url('{{page.attributes.images|first}}')" data-id="{{page.attributes.id}}">
-				</li>
-			{% endif %}
-
+			<li class="moodboard__item" style="background-image:url('{{page.attributes.images|first}}')" data-id="{{page.attributes.id}}"></li>
 		{% endfor %}
 
 	</ul>

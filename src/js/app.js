@@ -5,6 +5,7 @@ import History from './modules/history';
 import ScreenMode from './utils/screenmode';
 import MoodBoard from './modules/moodboard';
 import Block from './modules/block';
+import Carousel from './modules/carousel';
 import Footer from './modules/footer';
 
 window.log = log;
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	let $content = document.querySelector('.content');
 	let $header = document.querySelector("*[data-js='header']");
 	let $sections = document.querySelectorAll(".content__section");
+	let $sectionBackButtons = document.querySelectorAll("*[data-js='section-back']");
 	let $contentContainer =  document.querySelector("*[data-js='content']");
 	let $scrollTrigger =  document.querySelector("*[data-js='scroll-trigger']");
 	let sectionStore = {};
@@ -83,7 +85,16 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	Array.from($sections).forEach(($section) => {
 		let sectionId = $section.getAttribute('id');
 		let blocks = initBlocks($section);
+		let carousels = initCarousels($section);
 		sectionStore[sectionId] = blocks;
+	});
+
+
+	Array.from($sectionBackButtons).forEach(($button) => {
+		$button.addEventListener('click', (e) => {
+			scrollTo('#top', 500);
+			e.preventDefault();
+		});
 	});
 
 	function applyScreenMode(mode){
@@ -98,7 +109,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
 	function showDetail(id){
 		let $section = document.querySelector(`#${id}`);
-		let $imageSets = $section.querySelectorAll("*[data-js='images']");
 		$content.setAttribute('data-section', id);
 
 		resetBlocks(sectionStore[id]);
@@ -106,20 +116,23 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		setTimeout(() => {
 			$('html, body').scrollTop(0);
 			$page.classList.add('page--detail');
+			$html.classList.add('html--detail');
 		}, 10);
 
 		$page.setAttribute('data-page', id);
 
-		initImages($imageSets);
+		initImages($section);
+		initCarousels($section);
 		// history.set(`/#${id}`);
 	}
 
 	function removeDetail(){
 		$content.setAttribute('data-section', '');
 		$page.classList.remove('page--detail');
+		$html.classList.remove('html--detail');
         scrollTo('#top', 500);
 
-        history.set('');
+        // history.set('');
 	}
 
 	function initBlocks($section){
@@ -148,7 +161,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
 			block.on('close', (e) => {
 			});
 
-
 			blockStore.push(block);
 			++index;
 		});
@@ -169,8 +181,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		});
 	}
 
-	function initImages($imageSets){
-
+	function initImages($section){
+		let $imageSets = $section.querySelectorAll("*[data-js='images']");
 		Array.from($imageSets).forEach(($images) => {
 			// http://masonry.desandro.com/
 			var msnry = new Masonry( $images, {
@@ -182,6 +194,15 @@ document.addEventListener("DOMContentLoaded", function(e) {
 			imagesLoaded( $images ).on( 'progress', function() {
 			  	msnry.layout();
 			});
+		});
+
+	}
+
+	function initCarousels($section){
+		let $carousels = $section.querySelectorAll("*[data-js='carousel']");
+		Array.from($carousels).forEach(($carousel) => {
+			let carousel = new Carousel($carousel);
+			$carousel.removeAttribute('data-js');
 		});
 
 	}
@@ -202,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
     scrollTo('#top', 250);
 
 	// Temp
-	// showDetail('de-kavels');
+	// showDetail('id_de-woning');
 	// moodBoard.detail();
 });
 

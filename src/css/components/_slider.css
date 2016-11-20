@@ -1,0 +1,55 @@
+/* Slick overides */
+.slick-list{
+	height: 100%;
+}
+
+.slick-track{
+	height: 100%;
+}
+
+.slick-arrow{
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    background: transparent;
+    padding: 0;
+    border: none;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    width: 1em;
+    height: 1em;
+    line-height: 2.25;
+    font-size: 3em;
+}
+
+.slick-arrow.slick-disabled{
+	opacity: .25;
+	transform: scale(1, 1);
+	cursor: default;
+}
+
+.slick-arrow > svg{
+	display: inline-block;
+}
+
+.slick-arrow:before{
+	display: none;
+}
+
+.slick-prev{
+    left: 0;
+}
+
+.slick-next{
+    right: 0;
+    text-align: right;
+}
+
+.slick-prev {
+    left: 1rem;
+}
+
+.slick-next {
+    right: 0;
+}

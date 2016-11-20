@@ -26,37 +26,28 @@
 			
 			{% for page in pages %}
 				
-				{% set pageType = page.attributes.type|default('blocks') %}
-				
 				<section class="section content__section {% if loop.first %} active {% endif %}" id="{{page.attributes.id}}">
 
 					<header class="section__header title title--large">
+						<a href="#top" class="section__back" style="display: none" data-js="section-back">
+							{% include 'components/_scribble-top.twig' %}
+						</a>
 						<div class="section__icon">
 							{% include 'components/_scribble-down.twig' %}
 						</div>
 						<h{{loop.index}} class="section__title">{{page.attributes.caption}}</h{{loop.index}}>
 					</header>
 
-					{% if pageType == 'blocks' %}
-
 						{% for block in page.attributes.sections %}
-							{% embed "components/_block.twig" with {"content": block, "modifiers": "content__item", "index": 0, "id": "" }  %}
-							{% endembed %}
+
+							{% if block.type == 'images' %}
+								{% include "components/_images.twig" with {"images": block.images}  %}
+							{% else %}
+								{% include "components/_block.twig" with {"block": block, "modifiers": "content__item", "index": 0, "id": "" }  %}
+							{% endif %}
+		
 						{% endfor %}
 
-					{% else %}
-
-						<div data-js="images" class="images page__images content__item">
-							<div class="images__sizer"></div>
-							{% for image in page.attributes.images %}
-								<div class="images__item">
-									<img src="{{image}}"/>
-								</div>
-							{% endfor %}
-
-						</div>
-
-					{% endif %}
 
 				</section>
 			{% endfor %}

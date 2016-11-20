@@ -20,7 +20,14 @@ class MoodBoard {
 		// http://kenwheeler.github.io/slick/
 		this.$list.slick({
 			slide: '.moodboard__item',
-			// appendArrows: false,
+			prevArrow: `<button type="button" class="slick-prev">
+				<svg viewBox="0 0 1792 1792" preserveAspectRatio="xMidYMid meet">
+ 		 			<use xlink:href="#chevron-left" />
+				</svg></button>`,
+			nextArrow: `<button type="button" class="slick-next">
+				<svg viewBox="0 0 1792 1792" preserveAspectRatio="xMidYMid meet">
+ 		 			<use xlink:href="#chevron-right" />
+				</svg></button>`,
 			speed: moveDuration,
 			draggable: false
 		});

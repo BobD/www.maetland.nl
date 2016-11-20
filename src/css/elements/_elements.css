@@ -1,7 +1,13 @@
-html,
-body{
+html.js,
+html.js body{
 	height: 100%;
 }
+
+html.js.html--detail,
+html.js.html--detail body{
+    height: auto;
+}
+
 
 html {
   box-sizing: border-box;
@@ -36,5 +42,12 @@ p{
             margin: 0 auto;
             margin-top: 0.2em;
         }
+    }
+}
+
+@media (--minimal-viewport) {
+    html,
+    body{
+        height: auto;
     }
 }

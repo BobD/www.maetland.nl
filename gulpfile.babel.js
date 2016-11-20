@@ -41,14 +41,14 @@ gulp.task('data', () => {
         let navItems = [].concat(config.navigation.site, config.navigation.projects);
 
         navItems.forEach((item) => {
-            item.id = slug(item.label, {lower:true});
+            item.id = `id_${slug(item.label, {lower:true})}`;
         });
         return config;
     }))
     .pipe(gulpFn((file) => {
         let config = file.data;
         let data = Object.assign({pages: {}, projects: {}}, config);
-        let pages =  glob.sync(`${contentDir}/pages/**/page.md`, {ignore: `${contentDir}/pages/contact/page.md`});
+        let pages =  glob.sync(`${contentDir}/pages/**/page.md`);
         let files = pages;
 
         files.forEach((file) => {
@@ -64,13 +64,13 @@ gulp.task('data', () => {
             } catch (err) {}
 
             try{
-                sections = fs.readdirSync(`${contentDir}/${type}/${source}/sections/`);
+                sections = glob.sync(`${contentDir}/${type}/${source}/sections/**/*.md`);
             } catch (err) {}
 
             try {
                 let fileSource = fs.readFileSync(file, 'utf-8');
                 let fileContent = frontMatter(fileSource);
-                fileContent.attributes.id =  slug(fileContent.attributes.title, {lower:true});
+                fileContent.attributes.id =  `id_${slug(fileContent.attributes.title, {lower:true})}`;
 
                 fileContent.attributes.images = [];
                 images.forEach((entry) => {
@@ -78,12 +78,38 @@ gulp.task('data', () => {
                         fileContent.attributes.images.push(`./images/${type}/${source}/${entry}`);
                     }
                 })
+
                 fileContent.attributes.sections = [];
                 sections.forEach((section) => {
-                    let fSource = fs.readFileSync(`${contentDir}/${type}/${source}/sections/${section}`, 'utf-8');
-                    let fContent = frontMatter(fSource);
-                    fileContent.attributes.sections.push(fContent);
+                    let sSource = fs.readFileSync(`${section}`, 'utf-8');
+                    let sContent = frontMatter(sSource);
+
+                    let sDirPath = path.resolve(section, '..');
+                    let sDirName = sDirPath.split('/').pop();
+                    let sImageFiles = glob.sync(`${sDirPath}/images/*.*`);
+                    let sImages = [];
+
+                    sImageFiles.forEach((image) => {
+                        if(path.extname(image) === ".png" || path.extname(image) === ".jpg" ){
+                            let imageName = path.basename(image);
+                            let imagePath = `/images/${type}/${source}/sections/${sDirName}`;
+                            sImages.push(`${imagePath}/images/${imageName}`);
+                        }
+                    });
+
+                    fileContent.attributes.sections.push({
+                        content: sContent,
+                        images: sImages,
+                        type: sContent.attributes.type ? sContent.attributes.type : 'text'
+                    });
+
                 })
+                // sections.forEach((section) => {
+                //     let fSource = fs.readFileSync(`${contentDir}/${type}/${source}/sections/${section}`, 'utf-8');
+                //     let fContent = frontMatter(fSource);
+                //     fileContent.attributes.sections.push(fContent);
+                // })
+
                 let typeData = data[type];
                 typeData[source] = fileContent;
             } catch (err) {}
@@ -93,7 +119,7 @@ gulp.task('data', () => {
         _.extend(data, {env: args.env, site: frontMatter(siteConfig)});
         siteData = data;  
 
-        console.log(siteData);
+        // console.log(siteData);
     }));
 
     return stream;
@@ -166,16 +192,13 @@ gulp.task('site-images', function () {
 });
 
 gulp.task('page-images', function () {
-  return gulp.src(`${contentDir}/pages/**/images/*.*`)
+  return gulp.src(`${contentDir}/pages/*/images/*.*`)
         .pipe(changed(destinationDir))
         .pipe(imageResize({
             width : 1600,
             imageMagick: true
         }))
         .pipe(image({
-            // jpegRecompress: false,
-            // jpegoptim: true,
-            // mozjpeg: true,
         }))
         .pipe(rename(function (path) {
             let sourceName = path.dirname.split('/').shift();
@@ -185,7 +208,24 @@ gulp.task('page-images', function () {
         .pipe(gulp.dest(`${destinationDir}/images`))
 });
 
-gulp.task('images', ['site-images', 'page-images']);
+gulp.task('section-images', function () {
+  return gulp.src(`${contentDir}/pages/**/sections/**/images/*.*`)
+        .pipe(changed(destinationDir))
+        .pipe(imageResize({
+            width : 800,
+            imageMagick: true
+        }))
+        .pipe(image({
+        }))
+        .pipe(rename(function (path) {
+            let sourceName = path.dirname.split('/').shift();
+            path.dirname = `/pages/${path.dirname}`;
+            return path;
+          }))
+        .pipe(gulp.dest(`${destinationDir}/images`))
+});
+
+gulp.task('images', ['site-images', 'page-images', 'section-images']);
 
 gulp.task('public', function () {
   return gulp.src([`${sourceDir}/public/*.*`, `${sourceDir}/public/.*`])

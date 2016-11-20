@@ -1,14 +1,12 @@
 {% set sectionIndex = (index + 1) |default(1) %}
 {% set sectionId = id %}
 
-<div data-js="block" class="block {{modifiers}}">
-
-{#  {% if not loop.first %}closed{% endif %} #}
+<div data-js="block" class="block {{modifiers}} block--{{block.type}}">
 	
 	<header class="block__header">
 		<h{{sectionIndex}} class="block__title">
-			<span class="block__caption">{{content.attributes.description}}</span>
-			{{content.attributes.title}}
+			<span class="block__caption">{{block.content.attributes.description}}</span>
+			{{block.content.attributes.title}}
 		</h{{sectionIndex}}>
 		<div class="block__icon">
 			{% include 'components/_chevron-down.twig' %}
@@ -18,7 +16,14 @@
 	<div class="block__content-container">
         {% block content %}
         	<div class="block__content">
-        	{{content.body}}
+        	{% if block.type == 'carousel' %}
+        		{% include "components/_carousel.twig" with {"images": block.images}  %}
+			{% else %}
+				<div class="block__text">
+					{{block.content.body}}
+				</div>
+        	{% endif %}
+        	
         	</div>
         {% endblock %}
 	</div>

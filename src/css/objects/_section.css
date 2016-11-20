@@ -17,6 +17,15 @@
 .section__title{
 }
 
+
+.section__back{
+	color: inherit;
+	text-decoration: none;
+	width: 3em;
+	margin: 0 auto;
+	margin-bottom: .5em;
+}
+
 @media (--minimal-viewport) {
 	.section{
 		margin: 0;
@@ -34,6 +43,10 @@
 
 	.section__icon{
 		display: none;
+	}
+
+	.section__back{
+		display: block !important;
 	}
 }
 

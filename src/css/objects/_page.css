@@ -24,6 +24,7 @@ html.js,
 .js .page__main{
 }
 
+.js.html--detail,
 .js .page--detail{
 	overflow: auto;
 }
@@ -33,7 +34,8 @@ html.js,
 }
 
 @media (--minimal-viewport) {
+	html.js,
 	.js .page{
-		overflow: auto;
+		overflow: visible;
 	}
 }

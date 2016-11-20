@@ -47,7 +47,15 @@
 }
 
 .block__content{
+
+}
+
+.block__text{
 	padding: 1em 0;
+}
+
+.block__text iframe{
+	margin-top: -1em;
 }
 
 .block{
