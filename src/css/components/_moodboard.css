@@ -43,7 +43,7 @@
 	white-space: nowrap;
 	text-transform: uppercase;
 	text-decoration: none;
-	cursor: pointer;
+	cursor: default;
 	font-size: var(--ms-1);
 
 	transition: opacity .5s ease;
@@ -273,6 +273,10 @@
 
 	.moodboard__info{
 
+	}
+
+	.moodboard__info-list{
+		margin-top: -2em;
 	}
 
 	.moodboard__item{

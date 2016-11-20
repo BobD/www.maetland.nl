@@ -2,4 +2,54 @@
 title: Downloads
 description:
 ---
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<ul class="downloads">
+
+	<li target="_blank" class="download__item">
+		<a href="" class="download__link">Kavel 1</a>
+	</li>
+
+	<li target="_blank" class="download__item">
+		<a href="" class="download__link">Kavel 2</a>
+	</li>
+
+	<li target="_blank" class="download__item">
+		<a href="" class="download__link">Kavel 3</a>
+	</li>
+
+	<li  target="_blank"class="download__item">
+		<a href="" class="download__link">Kavel 4</a>
+	</li>
+
+	<li target="_blank" class="download__item">
+		<a href="" class="download__link">Kavel 5</a>
+	</li>
+
+	<li target="_blank" class="download__item">
+		<a href="" class="download__link">Kavel 6</a>
+	</li>
+
+	<li target="_blank" class="download__item">
+		<a href="" class="download__link">Kavel 7</a>
+	</li>
+
+	<li target="_blank" class="download__item">
+		<a href="" class="download__link">PASSE-PARTOUT</a>
+	</li>
+
+	<li target="_blank" class="download__item">
+		<a href="" class="download__link">Mandelige levering</a>
+	</li>
+
+	<li target="_blank" class="download__item">
+		<a href="" class="download__link">FAQ</a>
+	</li>
+
+	<li target="_blank" class="download__item">
+		<a href="" class="download__link">Afstandenkaart</a>
+	</li>
+
+	<li target="_blank" class="download__item">
+		<a href="" class="download__link">History</a>
+	</li>
+
+</ul>

@@ -1,5 +1,5 @@
 ---
 title: Stijl & inspiratie
-caption: Warm & aards
+caption: 
 description:
 ---

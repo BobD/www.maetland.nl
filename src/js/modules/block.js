@@ -1,4 +1,5 @@
 import Events from 'events';
+import $ from 'jquery';
 
 class Block {
 
@@ -12,10 +13,10 @@ class Block {
 		this.$header = this.$block.getElementsByClassName('block__header')[0];
 		
 		this.$header.addEventListener('click', (e) => {
-			let isClosed = this.$block.classList.value.indexOf('closed') != -1;
+			let isClosed = $(this.$block).hasClass('closed');
 
 			if(isClosed){
-				this.$block.classList.remove('closed');
+				$(this.$block).removeClass('closed');
 			}
 			
 			this.eventEmitter.emit(!isClosed ? 'close' : 'open', {
@@ -25,11 +26,11 @@ class Block {
 	}
 
 	close(){
-		this.$block.classList.add('closed');
+		$(this.$block).addClass('closed');
 	}
 
 	open(){
-		this.$block.classList.remove('closed');
+		$(this.$block).removeClass('closed');
 	}
 
 	on(){

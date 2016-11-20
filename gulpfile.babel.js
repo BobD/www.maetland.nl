@@ -92,7 +92,7 @@ gulp.task('data', () => {
                     sImageFiles.forEach((image) => {
                         if(path.extname(image) === ".png" || path.extname(image) === ".jpg" ){
                             let imageName = path.basename(image);
-                            let imagePath = `/images/${type}/${source}/sections/${sDirName}`;
+                            let imagePath = `images/${type}/${source}/sections/${sDirName}`;
                             sImages.push(`${imagePath}/images/${imageName}`);
                         }
                     });
@@ -104,11 +104,6 @@ gulp.task('data', () => {
                     });
 
                 })
-                // sections.forEach((section) => {
-                //     let fSource = fs.readFileSync(`${contentDir}/${type}/${source}/sections/${section}`, 'utf-8');
-                //     let fContent = frontMatter(fSource);
-                //     fileContent.attributes.sections.push(fContent);
-                // })
 
                 let typeData = data[type];
                 typeData[source] = fileContent;
@@ -228,7 +223,7 @@ gulp.task('section-images', function () {
 gulp.task('images', ['site-images', 'page-images', 'section-images']);
 
 gulp.task('public', function () {
-  return gulp.src([`${sourceDir}/public/*.*`, `${sourceDir}/public/.*`])
+  return gulp.src([`${sourceDir}/public/**/*.*`, `${sourceDir}/public/.*`])
         .pipe(changed(destinationDir))
         .pipe(gulp.dest(`${destinationDir}/`))
 });

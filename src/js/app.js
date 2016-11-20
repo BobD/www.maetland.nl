@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	let sectionStore = {};
 
 
-	$html.classList.remove('no-js');
-	$html.classList.add('js');
+	$($html).toggleClass('no-js', false);
+	$($html).toggleClass('js', true);
 
 	history.on('change', (e) => {
 		showDetail(e.id)
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	});	
 
 	moodBoard.on('maximize', (e) => {
-		$header.classList.add('header--full');
+		$($header).toggleClass('header--full', true);
 	});
 
 	moodBoard.on('change', (e) => {
@@ -98,13 +98,22 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	});
 
 	function applyScreenMode(mode){
-		(mode.isMobile) ? $html.classList.add('is-mobile') : $html.classList.remove('is-mobile');
-		(mode.isMobileiOS) ? $html.classList.add('is-ios') : $html.classList.remove('is-ios');
-		(mode.isTablet) ? $html.classList.add('is-tablet') : $html.classList.remove('is-tablet');
-		(mode.isTabletLandscape) ? $html.classList.add('is-tablet-landscape') : $html.classList.remove('is-tablet-landscape');
-		(mode.isTabletPortrait) ? $html.classList.add('is-tablet-portrait') : $html.classList.remove('is-tablet-portrait');
-		(mode.isMinimal) ? $html.classList.add('is-minimal') : $html.classList.remove('is-minimal');
-		(!mode.isMobile && !mode.isTablet) ? $html.classList.add('is-desktop') : $html.classList.remove('is-desktop');
+		// (mode.isMobile) ? $html.classList.add('is-mobile') : $html.classList.remove('is-mobile');
+		// (mode.isMobileiOS) ? $html.classList.add('is-ios') : $html.classList.remove('is-ios');
+		// (mode.isTablet) ? $html.classList.add('is-tablet') : $html.classList.remove('is-tablet');
+		// (mode.isTabletLandscape) ? $html.classList.add('is-tablet-landscape') : $html.classList.remove('is-tablet-landscape');
+		// (mode.isTabletPortrait) ? $html.classList.add('is-tablet-portrait') : $html.classList.remove('is-tablet-portrait');
+		// (mode.isMinimal) ? $html.classList.add('is-minimal') : $html.classList.remove('is-minimal');
+
+		// Some annoying jquery porst since IE does not support classList properly yet
+		let $htmlJ = $($html);
+		$htmlJ.toggleClass('is-mobile', mode.isMobile);
+		$htmlJ.toggleClass('is-ios', mode.isMobileiOS);
+		$htmlJ.toggleClass('is-tablet', mode.isTablet);
+		$htmlJ.toggleClass('is-tablet-landscape', mode.isTabletLandscape);
+		$htmlJ.toggleClass('is-tablet-portrait', mode.isTabletPortrait);
+		$htmlJ.toggleClass('is-tablet-minimal', mode.isMinimal);
+		$htmlJ.toggleClass('is-desktop', (!mode.isMobile && !mode.isTablet));
 	}
 
 	function showDetail(id){
@@ -115,8 +124,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
 		setTimeout(() => {
 			$('html, body').scrollTop(0);
-			$page.classList.add('page--detail');
-			$html.classList.add('html--detail');
+			$($page).addClass('page--detail');
+			$($html).addClass('html--detail');
 		}, 10);
 
 		$page.setAttribute('data-page', id);
@@ -217,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	}
 
 	setTimeout(() => {
-		$page.classList.add('page--init');
+		$($page).toggleClass('page--init', true);
 	}, 1000);
 
     scrollTo('#top', 250);

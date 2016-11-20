@@ -27,27 +27,28 @@
 			{% for page in pages %}
 				
 				<section class="section content__section {% if loop.first %} active {% endif %}" id="{{page.attributes.id}}">
+					
+					{% if page.attributes.caption is not empty %}
+					
+						<header class="section__header title title--large">
+							<a href="#top" class="section__back" style="display: none" data-js="section-back">
+								{% include 'components/_scribble-top.twig' %}
+							</a>
+							<div class="section__icon">
+								{% include 'components/_scribble-down.twig' %}
+							</div>
+							<h{{loop.index}} class="section__title">{{page.attributes.caption}}</h{{loop.index}}>
+						</header>
 
-					<header class="section__header title title--large">
-						<a href="#top" class="section__back" style="display: none" data-js="section-back">
-							{% include 'components/_scribble-top.twig' %}
-						</a>
-						<div class="section__icon">
-							{% include 'components/_scribble-down.twig' %}
-						</div>
-						<h{{loop.index}} class="section__title">{{page.attributes.caption}}</h{{loop.index}}>
-					</header>
+					{% endif %}
 
-						{% for block in page.attributes.sections %}
-
-							{% if block.type == 'images' %}
-								{% include "components/_images.twig" with {"images": block.images}  %}
-							{% else %}
-								{% include "components/_block.twig" with {"block": block, "modifiers": "content__item", "index": 0, "id": "" }  %}
-							{% endif %}
-		
-						{% endfor %}
-
+					{% for block in page.attributes.sections %}
+						{% if block.type == 'images' %}
+							{% include "components/_images.twig" with {"block": block}  %}
+						{% else %}
+							{% include "components/_block.twig" with {"block": block, "modifiers": "content__item", "index": 0, "id": "" }  %}
+						{% endif %}
+					{% endfor %}
 
 				</section>
 			{% endfor %}

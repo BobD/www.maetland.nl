@@ -1,10 +1,6 @@
 ---
-title: De Villa
-description: De Architect over
+title: ONGEKENDE MOGELIJKHEDEN
+description:  DE ONTWIKKELAAR OVER DE 
 ---
-<iframe id="iframe-wmdule" src="http://woonmodule.nl/maetland/" width="100%" height="680" frameborder="0" scrolling="no"></iframe>
-<script>
-//<![CDATA[
-window.addEventListener('message', function(e) { var o = e.origin, d='woonmodule.nl'; if (o && o.substr(-d.length) === d) document.getElementById('iframe-wmdule').height = e.data; });
-//]]>
-</script>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+

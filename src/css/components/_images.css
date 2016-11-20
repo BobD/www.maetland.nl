@@ -1,5 +1,5 @@
 .images{
-
+	margin-bottom: 6em;
 }
 
 .images:after {
@@ -8,9 +8,18 @@
   	clear: both;
 }
 
+.images__header{
+	margin-bottom: 2em;
+	text-align: center;
+}
+
+.images__container{
+
+}
+
 .images__sizer,
 .images__item{
- 	width: 33%;
+ 	width: 50%;
 }
 
 .images__item{

@@ -91,6 +91,27 @@
 
 .contact__form{
 	padding: 1em 2em 1em 1em;
+	transition: all .5s ease;
+	min-height: 20em;
+
+	&:before{
+		content: 'Bedankt, u wordt zo spoedig mogelijk teruggebeld';
+		display: block;
+		text-align: center;
+		opacity: 0;
+		transition: all .5s ease .5s;
+	}
+
+	&.contact__form--success{
+		min-height: 0;
+		& > *{
+			display: none;
+		}
+
+		&:before{
+			opacity: 1;
+		}
+	}
 }
 
 .contact__label{
@@ -98,9 +119,30 @@
 	width: 100%;
 	margin: .5em 0;
 
+	position: relative;
+
+	& .parsley-errors-list{
+		position: absolute;
+		top: 0;
+		right: .5em;
+		color: white;
+		line-height: 2.5;
+		font-size: 80%;
+		font-family: inherit;
+		opacity: .75;
+	}
+
+	&:focus{
+		background: red;
+	}
+
 	&--textarea{
 		padding-left: 6em;
 		margin-top: 1.5em;
+
+		& .parsley-errors-list{
+			padding-left: 7.5em;
+		}
 	}
 }
 
@@ -114,6 +156,7 @@
 	display: block;
 	float: none;
 	overflow: hidden;
+	position: relative;
 }
 
 .contact__input,

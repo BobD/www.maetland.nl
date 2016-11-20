@@ -1,8 +1,22 @@
-<div data-js="images" class="images page__images content__item">
-	<div class="images__sizer"></div>
-	{% for image in images %}
-		<div class="images__item">
-			<img src="{{image}}"/>
+<div class="images page__images content__item">
+	
+	<div class="images__header  title title--large">
+		
+		<a href="#top" class="section__back" style="display: none" data-js="section-back">
+			{% include 'components/_scribble-top.twig' %}
+		</a>
+		<div class="section__icon">
+			{% include 'components/_scribble-down.twig' %}
 		</div>
-	{% endfor %}
+		<div class="section__title">{{block.content.attributes.title}}</div>
+	</div>
+
+	<div  data-js="images" class="images__container">
+		<div class="images__sizer"></div>
+		{% for image in block.images %}
+			<div class="images__item">
+				<img src="{{image}}"/>
+			</div>
+		{% endfor %}
+	</div>
 </div> 

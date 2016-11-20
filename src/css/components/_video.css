@@ -1,0 +1,8 @@
+.easyhtml5video{
+	max-width: none !important;
+	min-height: 27em;
+
+	& img{
+		display: none !important
+	}
+}

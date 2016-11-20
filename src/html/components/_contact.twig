@@ -1,3 +1,6 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.0/parsley.min.js"></script>
+
 <section class="section content__section contact">
 
 	<div class="contact__nav">
@@ -28,35 +31,35 @@
 	<div class="contact__section">
 		<p>Kies zelf een geschikt moment</p>
 		
-		<form class="contact__form" id="contact">
+		<form  data-parsley-validate="" class="contact__form" id="contact" name="contact" method="post" action="email_form.php">
 			<label class="contact__label">
-				<span class="contact__form-title">naam</span>
+				<span class="contact__form-title">naam<span>*</span></span>
 				<span class="contact__input-container">
-					<input class="contact__input" type="text" name="name"/>
+					<input class="contact__input" type="text" name="name" required="" data-parsley-no-focus data-parsley-error-message="Vergeet uw naam niet"/>
 				</span>
 			</label>
 
 			<label class="contact__label">
-				<span class="contact__form-title">tel.nr</span>
+				<span class="contact__form-title">tel.nr<span>*</span></span>
 				<span class="contact__input-container">
-					<input class="contact__input" type="text" name="name"/>
+					<input class="contact__input" type="text" name="telephone" required="" data-parsley-no-focus data-parsley-error-message="Vergeet uw telefoon nummer niet!"/>
 				</span>
 			</label>
 
 			 <label class="contact__label">
-				<span class="contact__form-title">e-mail</span>
+				<span class="contact__form-title">e-mail<span>*</span></span>
 				<span class="contact__input-container">
-					<input class="contact__input" type="email" name="email"/>
+					<input class="contact__input" type="email" name="email" required="" data-parsley-no-focus data-parsley-error-message="Vergeet uw email adres niet!"/>
 				</span>
 			</label>
 
 			<br/>
 			<label class="" for="time">
-				<p>U KUNT HIERONDER AANGEVEN OP <a href="">WELKE DAG EN TIJDSTIP</a> U TERUGGEBELD WILT WORDEN</p>
+				<p>U KUNT HIERONDER AANGEVEN OP <span class="underline">WELKE DAG EN TIJDSTIP</span> U TERUGGEBELD WILT WORDEN<span>*</span></p>
 			</label>
 
 			 <div class="contact__label contact__label--textarea">
-				<textarea id="time" class="contact__textarea" type="email" name="time" rows="8"></textarea>
+				<textarea id="time" class="contact__textarea" name="comment" rows="8" required="" data-parsley-no-focus data-parsley-error-message="Wanneer wilt u teruggebeld worden?"></textarea>
 			</div>
 
 			<button class="contact__submit" type="submit" form="contact" value="Submit">
@@ -70,3 +73,35 @@
 	</div>
 	
 </section>
+
+<script>
+	$(function () {
+		var $form = $('#contact');
+
+		$form.find('input').on('focus', function(){
+			var $parent = $(this).parent();
+			var $errorMessage = $parent.find('.parsley-errors-list');
+			$errorMessage.hide();
+		});
+
+		$form.find('input').on('blur', function(){
+			var $parent = $(this).parent();
+			var $errorMessage = $parent.find('.parsley-errors-list');
+			$errorMessage.show();
+		});
+
+	  	$form.parsley().on('field:validated', function() {
+	    	var ok = $('.parsley-error').length === 0;
+	    	$('.bs-callout-info').toggleClass('hidden', !ok);
+	    	$('.bs-callout-warning').toggleClass('hidden', ok);
+	  	})
+	  	.on('form:submit', function() {
+		  	var formAction = $form.attr('action');
+		  	$.post( formAction, $form.serialize())
+			 .done(function( data ) {
+			   $form.toggleClass('contact__form--success', true);
+			});
+		    return false;
+	  });
+	});
+</script>
