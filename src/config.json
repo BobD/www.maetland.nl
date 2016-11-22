@@ -1,11 +1,5 @@
 {
-    "navigation": {
-        "site": [
-            {"label": "About", "url": ""},
-            {"label": "Contact", "url": ""}
-        ],
-
-        "projects": [
-        ]
+    "globals": {
+    	"test": "add global parameters here"
     }
 }   

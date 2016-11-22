@@ -38,16 +38,11 @@ gulp.task('data', () => {
     let stream = gulp.src(`${sourceDir}/config.json`)
     .pipe(data((file) => {
         let config = JSON.parse(String(file.contents));
-        let navItems = [].concat(config.navigation.site, config.navigation.projects);
-
-        navItems.forEach((item) => {
-            item.id = `id_${slug(item.label, {lower:true})}`;
-        });
         return config;
     }))
     .pipe(gulpFn((file) => {
         let config = file.data;
-        let data = Object.assign({pages: {}, projects: {}}, config);
+        let data = Object.assign({pages: {}}, config);
         let pages =  glob.sync(`${contentDir}/pages/**/page.md`);
         let files = pages;
 
@@ -112,8 +107,6 @@ gulp.task('data', () => {
 
                 })
 
-                // console.log(fileContent.attributes.id);
-
                 let typeData = data[type];
                 typeData[source] = fileContent;
             } catch (err) {}
@@ -124,7 +117,7 @@ gulp.task('data', () => {
         _.extend(data, {env: args.env, site: frontMatter(siteConfig), version: version});
         siteData = data;  
 
-        // console.log(siteData.pages);
+        // console.log(siteData);
     }));
 
     return stream;
