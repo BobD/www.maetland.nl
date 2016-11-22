@@ -8,7 +8,7 @@ You need node.js (https://nodejs.org/en/) and gulp (http://gulpjs.com/) installe
 
 ### Installing
 
-Once you have node.js and gulp ready, install all other dependencie with:
+Once you have node.js and gulp ready, install all other dependencies with:
 
 ```
 npm install
@@ -32,35 +32,35 @@ Evertything you need to modify the website can be found in the scr folder. This 
 * js
 * public
 
-These source files are then transformed into the static files needed to run the website. The build folder will contain the static files needed to test the website locally, and the dist folder contains the optimized files for deplyment on the server,
+These source files are transformed into the static files needed to run the website. The build folder will contain the static files needed to test the website locally, and the dist folder contains the optimized files for deployment on the server,
 
 ### Source files
 
 #### config file
 
-The config.json contains global variables for the website used in the Twig templates. This data will be appended with the generated Frontmatter and needed images (see 'content folder' below).
+The config.json contains global variables for the website used in the Twig templates. This data will be appended using gulp with the generated Frontmatter data and needed images (see 'content folder' below).
 
 #### content folder
 
 The content folder contains all images and texts needed in the website.
 
-The images can be placed in a couple locations depending on where they are needed in the website. You can place them inside the 'images' folder in the root for globally used assets, in a spefic page or in a specic section within a page. The first image inside a page (for example pages>p1_home>images>[..].jpg) will be used as the big header image for that page. Always make sure the images placed contain no spaces and and lowercase letters!
+The images can be placed in a couple locations depending on where they are needed in the website. You can place them inside the 'images' folder in the root for globally used assets. Or you can place them in a specific page or section within a page. The first image inside a page (for example pages>p1_home>images>[..].jpg) will be used as the big header image for that page. Always make sure the images placed contain no spaces and and lowercase letters!
 
 
-All texts for the pages and sections withing pages can be managed through either the page.md or section.md files. These files contain Frontmatter markup (https://www.npmjs.com/package/front-matter). In essence all attributes inside the two '---' delimiters will be available as property values inside the HTML, evertyhing below these delimiters is the actual text to be used in the page or section. This text can be either normal text, or HTML markip.
+All texts for the pages and sections withing pages can be managed through either the page.md or section.md files. These files contain Frontmatter markup (https://www.npmjs.com/package/front-matter). All names attributes between the two '---' delimiters will be available as attribute values inside the HTML, evertyhing below these delimiters is the actual text to be used in the page or section. This text can be either normal text, or HTML markip.
 
 
 #### css folder
 
 The css folder is globally arranged into a ITCSS file structure (https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/).
 
-The CSS itself is build using CSSnext (http://cssnext.io/) and some helpful utilities (https://ismamz.github.io/postcss-utilities/docs)
+The CSS itself is build using CSSnext (http://cssnext.io/) plus some helpful utilities (https://ismamz.github.io/postcss-utilities/docs)
 
 #### html folder
 
 All HTML is generated using Twig (http://twig.sensiolabs.org/), using the Frontmatter data supllied from the content folder.
 
-Right now there is one master layout (layouts/_site.twig) and two pages using that layout (pages/contact.twig and pages/index.twig). The index.twig will contain all 'pages' and sections from the content folder, and this will result in the index.html inside the build or dist folder. The contact.twig will become a seperate contact.html page.
+Right now there is one master layout (layouts/_site.twig) and two pages using that layout (pages/contact.twig and pages/index.twig). The index.twig will contain all content 'pages' and sections from the content folder, and this will result in a single index.html inside the build or dist folder. The contact.twig will become a seperate contact.html page.
 
 
 #### js folder
