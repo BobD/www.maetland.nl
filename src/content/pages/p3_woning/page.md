@@ -1,5 +1,5 @@
 ---
-title: De woning
+title: De villa
 caption: Klimaatneutrale villa
 description:
 ---

@@ -90,20 +90,29 @@ gulp.task('data', () => {
                     let sImages = [];
 
                     sImageFiles.forEach((image) => {
-                        if(path.extname(image) === ".png" || path.extname(image) === ".jpg" ){
-                            let imageName = path.basename(image);
+                        if(path.extname(image) === ".png" || path.extname(image) === ".jpg" || path.extname(image) === ".PNG" || path.extname(image) === ".JPG" ){
+                            let fileName = path.basename(image);
+                            let imageName = path.basename(image, path.extname(fileName));
                             let imagePath = `images/${type}/${source}/sections/${sDirName}`;
-                            sImages.push(`${imagePath}/images/${imageName}`);
+
+                            if(isNaN(Number(imageName))){
+                                sImages.push(`${imagePath}/images/${fileName}`);
+                            }else{
+                                sImages[Number(imageName)] = `${imagePath}/images/${fileName}`;
+                            }
                         }
                     });
 
                     fileContent.attributes.sections.push({
                         content: sContent,
                         images: sImages,
+                        id: `id_${slug(sContent.attributes.title, {lower:true})}`,
                         type: sContent.attributes.type ? sContent.attributes.type : 'text'
                     });
 
                 })
+
+                // console.log(fileContent.attributes.id);
 
                 let typeData = data[type];
                 typeData[source] = fileContent;
@@ -111,10 +120,11 @@ gulp.task('data', () => {
         });
 
         let siteConfig = fs.readFileSync(`${contentDir}/site.md`, 'utf-8');
-        _.extend(data, {env: args.env, site: frontMatter(siteConfig)});
+        let version = new Date().getTime();
+        _.extend(data, {env: args.env, site: frontMatter(siteConfig), version: version});
         siteData = data;  
 
-        // console.log(siteData);
+        // console.log(siteData.pages);
     }));
 
     return stream;
@@ -243,7 +253,7 @@ gulp.task('watch', ['data'], () => {
     }));
 
     watch(`${sourceDir}/content/**/*.*`, batch(function (events, done) {
-        gulp.start('compile', done);
+        gulp.start('images', 'compile', done);
     }));
 
     watch(`${sourceDir}/config.json`, batch(function (events, done) {

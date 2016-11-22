@@ -1,4 +1,4 @@
-<div class="images page__images content__item">
+<div class="images page__images content__item" id={{block.id}}>
 	
 	<div class="images__header  title title--large">
 		
@@ -11,12 +11,12 @@
 		<div class="section__title">{{block.content.attributes.title}}</div>
 	</div>
 
-	<div  data-js="images" class="images__container">
+	<ul data-js="images" class="images__container">
 		<div class="images__sizer"></div>
 		{% for image in block.images %}
-			<div class="images__item">
-				<img src="{{image}}"/>
-			</div>
+			<li class="images__item">
+				<img src="{{image}}?c={{version}}"/>
+			</li>
 		{% endfor %}
-	</div>
+	</ul>
 </div> 

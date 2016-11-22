@@ -3,7 +3,7 @@
 if(isset($_POST['email'])) {
     // EDIT THE 2 LINES BELOW AS REQUIRED
  
-    $email_to = "b.donderwinkel@gmail.com";
+    $email_to = "verheij@prohave.nl";
     $email_subject = "Landgoed Maetland contact";
  
     function died($error) {

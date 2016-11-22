@@ -6,6 +6,12 @@
 
 }
 
+@keyframes iconOpen {
+    0% {transform: translateY(0)}
+    50% {transform: translateY(50%)}
+    100% {transform: translateY(0%)}
+}
+
 .block__header{
 	background-color: var(--color-black);
 	color: white;
@@ -16,6 +22,15 @@
 	letter-spacing: .05em;
 	overflow: hidden;
 	transition: all .4s ease;
+
+	&:hover{
+		& .block__icon{
+			animation-name: iconOpen;
+			animation-duration: 1s;
+			animation-iteration-count: 2;
+			animation-timing-function: ease-out;
+		}
+	}
 }
 
 .block__title{
@@ -41,7 +56,7 @@
 }
 
 .block__content-container{
-	max-height: 50em;
+	max-height: 100em;
 	overflow: hidden;
 	transition: max-height .4s ease .25s;
 }
@@ -59,7 +74,9 @@
 }
 
 .block{
+
 	&.closed{
+
 		& .block__header{
 			cursor: pointer;
 			line-height: 6;
@@ -72,7 +89,23 @@
 		& .block__content-container{
 			max-height: 0;
 		}
-	}	
+	}
+
+	&.block--permanent{
+
+		& .block__header{
+			line-height: 3 !important;
+		}
+
+		& .block--icon{
+			opacity: 0 !important;
+		}
+
+
+		& .block__content-container{
+			max-height: 100em !important
+		}
+	}
 }
 
 @media (--minimal-viewport) {

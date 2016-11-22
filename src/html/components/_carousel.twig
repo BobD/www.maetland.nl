@@ -1,7 +1,7 @@
 <div class="carousel">
 	<div  data-js="carousel" class="carousel__list">
 		{% for image in images %}
-			<div class="carousel__item" style="background-image:url('{{image}}')">
+			<div class="carousel__item" style="background-image:url('{{image}}?c={{version}}')">
 			</div>
 		{% endfor %}
 	</div>

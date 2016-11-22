@@ -1,0 +1,13 @@
+.paragraph{
+	margin-top: 2em;
+	padding: 1em;
+
+	&.paragraph--dark{
+		background-color: var(--color-black);
+		color: white;
+	}
+
+	&.paragraph--center{
+		text-align: center;
+	}
+}

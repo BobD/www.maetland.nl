@@ -18,7 +18,7 @@
 		<div class="moodboard__caption title">
 			Scroll en ontdek
 		</div>
-		<a href="/" class="moodboard__back title">
+		<a href="index.html" class="moodboard__back title">
 			Terug
 		</a>
 	</div>
@@ -38,7 +38,7 @@
 	<ul class="moodboard__list">
 		
 		{% for page in pages %}
-			<li class="moodboard__item" style="background-image:url('{{page.attributes.images|first}}')" data-id="{{page.attributes.id}}"></li>
+			<li class="moodboard__item" style="background-image:url('{{page.attributes.images|first}}?c={{version}}')" data-id="{{page.attributes.id}}"></li>
 		{% endfor %}
 
 	</ul>

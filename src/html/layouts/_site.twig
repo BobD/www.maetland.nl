@@ -19,6 +19,8 @@
 
         <script async src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
         <script async src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+
 
         {#  #}
         <meta http-equiv="cache-control" content="max-age=0" />
@@ -34,6 +36,10 @@
         <![endif]-->
     </head>
     <body id="top" class="{{page_modifier}}" data-page="all">
+
+        <div data-js="section-back" class="page__top title">
+            Top
+        </div>
 
         {% block header %}
         {% endblock %}

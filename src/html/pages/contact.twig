@@ -4,7 +4,234 @@
 
 {% block main %}
 	<main class="main">
-		{% include "components/_contact.twig" with {} %}
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.0/parsley.min.js"></script>
+
+		<section class="section content__section contact">
+
+			<div class="contact__nav">
+				<div class="contact__back">
+					<a href="index.html">Home</a>
+				</div>
+			</div>
+			
+			<header class="contact__header">
+				<div class="section__icon">
+					{% include 'components/_scribble-down.twig' %}
+				</div>
+				<h1 class="title title--large">CONTACT NAAR WENS</h1>
+			</header>
+
+{# 			<div class="contact__section contact__section--border">
+				<p>
+					<span class="underline">Bel direct</span> Met de projectontwikkelaar van landgoed Maetland
+					<a href="tel:0655344041" class="label">HANS VERHEIJ - 06-55 34 40 41</a>
+				</p>
+			</div> #}
+
+			<div class="contact__section contact__section--border">
+				<p>
+					Neemt u contact op met makelaar ‘Thoma & Bennink Landerijenbureau’ in Gorssel 
+					<a href="tel:0575491455" class="label">0575 491 455</a>
+				</p>
+			</div>
+
+			<div class="contact__section contact__section--border">
+				<p>
+					of neemt u contact op met makelaar ‘Van Dijk Makelaars’ in Doetinchem
+					<a href="tel:0314366262" class="label">0314 366 262</a>
+				</p>
+			</div>
+
+			<div class="contact__section contact__section--border">
+				<p>
+					of neemt u contact op met verkoper ‘HPG Wonen’ te Naarden 
+					<a href="tel:0655344041" class="label">06 5534 4041</a>
+				</p>
+			</div>
+
+
+			<div class="contact__section contact__section--simple">
+				<div class="title title--large">OF</div>
+			</div>
+
+
+			<div class="contact__section contact__section--border">
+				<p>Kies zelf een geschikt moment</p>
+				
+				<form  data-parsley-validate="" class="contact__form" id="contact" name="contact" method="post" action="email_form.php">
+					<label class="contact__label">
+						<span class="contact__form-title">naam<span>*</span></span>
+						<span class="contact__input-container">
+							<input class="contact__input" type="text" name="name" required="" data-parsley-no-focus data-parsley-error-message="Vergeet uw naam niet"/>
+						</span>
+					</label>
+
+					<label class="contact__label">
+						<span class="contact__form-title">tel.nr<span>*</span></span>
+						<span class="contact__input-container">
+							<input class="contact__input" type="text" name="telephone" required="" data-parsley-no-focus data-parsley-error-message="Vergeet uw telefoon nummer niet!"/>
+						</span>
+					</label>
+
+					 <label class="contact__label">
+						<span class="contact__form-title">e-mail<span>*</span></span>
+						<span class="contact__input-container">
+							<input class="contact__input" type="email" name="email" required="" data-parsley-no-focus data-parsley-error-message="Vergeet uw email adres niet!"/>
+						</span>
+					</label>
+
+					<br/>
+					<label class="" for="time">
+						<p>U KUNT HIERONDER AANGEVEN OP <span class="underline">WELKE DAG EN TIJDSTIP</span> U TERUGGEBELD WILT WORDEN<span>*</span></p>
+					</label>
+
+					 <div class="contact__label contact__label--textarea">
+						<textarea id="time" class="contact__textarea" name="comment" rows="8" required="" data-parsley-no-focus data-parsley-error-message="Wanneer wilt u teruggebeld worden?"></textarea>
+					</div>
+
+					<button class="contact__submit" type="submit" form="contact" value="Submit">
+						<span class="contact__submit-label">Verstuur</span>
+						<span class="contact__submit-icon">
+							{% include 'components/_chevron-right.twig' %}
+						</span>
+					</button>
+
+				</form>
+			</div>
+			
+		</section>
+
+		<script>
+			$(function () {
+				var $form = $('#contact');
+
+				$form.find('input').on('focus', function(){
+					var $parent = $(this).parent();
+					var $errorMessage = $parent.find('.parsley-errors-list');
+					$errorMessage.hide();
+				});
+
+				$form.find('input').on('blur', function(){
+					var $parent = $(this).parent();
+					var $errorMessage = $parent.find('.parsley-errors-list');
+					$errorMessage.show();
+				});
+
+			  	$form.parsley().on('field:validated', function() {
+			    	var ok = $('.parsley-error').length === 0;
+			    	$('.bs-callout-info').toggleClass('hidden', !ok);
+			    	$('.bs-callout-warning').toggleClass('hidden', ok);
+			  	})
+			  	.on('form:submit', function() {
+				  	var formAction = $form.attr('action');
+				  	$.post( formAction, $form.serialize())
+					 .done(function( data ) {
+					   $form.toggleClass('contact__form--success', true);
+					});
+				    return false;
+			  });
+			});
+		</script>
+		
+		<section class="contact__section">
+
+			<p class="paragraph paragraph--dark paragraph--center">
+				Aan deze website werkten de volgende partijen met veel plezier samen:
+			</p>
+
+			<br/>
+			<br/>
+
+			<div class="definitions">
+
+				<div class="definitions__info">
+				</div>
+
+				<dl class="definitions__list">
+					
+					<dt class="definitions__title">Ontwikkelaar	 en verkoper</dt>
+					<dd class="definitions__description">HPG Wonen</dd>
+
+					<dt class="definitions__title">Communicatie en management</dt>
+					<dd class="definitions__description">Prohave</dd>
+
+					<dt class="definitions__title">Makelaar Gorssel</dt>
+					<dd class="definitions__description">Thoma & Bennink Landerijenbureau</dd>
+
+					<dt class="definitions__title">Makelaar Doetinchem</dt>
+					<dd class="definitions__description">Van Dijk Makelaars</dd>
+
+					<dt class="definitions__title">Ontwerp villa 6</dt>
+					<dd class="definitions__description">KOW concepts</dd>
+
+
+					<dt class="definitions__title">Constructie-ontwerp villa 6</dt>
+					<dd class="definitions__description">S3</dd>
+
+
+					<dt class="definitions__title">Film</dt>
+					<dd class="definitions__description">Twain Media</dd>
+
+
+					<dt class="definitions__title">Visualisaties</dt>
+					<dd class="definitions__description">CiiiD</dd>
+
+
+					<dt class="definitions__title">Sanitair visualisatie</dt>
+					<dd class="definitions__description">Tortu World</dd>
+
+
+					<dt class="definitions__title">Installaties</dt>
+					<dd class="definitions__description">Terberg Totaal Installaties</dd>
+
+
+					<dt class="definitions__title">Buitenverlichting</dt>
+					<dd class="definitions__description">Modernista</dd>
+
+					<dt class="definitions__title">Groen en infrastructuur</dt>
+					<dd class="definitions__description">Wencop Hoveniers</dd>
+
+					<dt class="definitions__title">Moodboard foto rietgedekte villa	</dt>
+					<dd class="definitions__description">Maas architecten</dd>
+
+					<dt class="definitions__title">Moodboard foto’s enkele interieurs</dt>
+					<dd class="definitions__description">Wildenberg interieurarchitectuur</dd>
+
+					<dt class="definitions__title">Moodboard foto garage</dt>
+					<dd class="definitions__description">Miavu Automotive</dd>
+
+					<dt class="definitions__title">Website productie</dt>
+					<dd class="definitions__description">Woonmodule</dd>
+
+					<dt class="definitions__title">Website ontwerp</dt>
+					<dd class="definitions__description">DizzyGrizzly</dd>
+
+					<dt class="definitions__title">Website ontwikkeling</dt>
+					<dd class="definitions__description">BD creations</dd>
+					
+				</dl>
+
+			</div>
+
+			<br/>
+
+			<p class="paragraph paragraph--dark paragraph--center">
+			Wij wensen u ontzettend veel plezier met het realiseren van uw droomhuis!
+			</p>
+
+			<p class="paragraph paragraph--center">
+			Wij hebben ons best gedaan om alle rechthebbenden met betrekking tot (foto)materiaal op deze website te achterhalen. Het betreft uitsluitend een sfeerimpressie. Eenieder die meent dat zijn/haar materiaal zonder voorafgaande toestemming is gebruikt, verzoeken wij om contact met ons op te nemen. 
+			<br/>
+			<br/>
+			We did our best to identify all owners regarding (photo)material on this website. This is only an impression. We ask anyone who believes that his/her material has been used without prior permission, to contact us.
+			<br/>
+			<br/>
+			Landgoed Maetland is een trademark van HPG Wonen BV  | © 2016
+			</p>
+		</section>
+
 	</main>
 {% endblock %}
 

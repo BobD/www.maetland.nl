@@ -4,6 +4,7 @@
 .page__header{
 	@util aspect-ratio(4:1);
 	transition: padding-bottom ease 1s;
+	z-index: 2;
 
 	&.header--full{
 		padding-bottom: 100vh;
@@ -11,6 +12,38 @@
 }
 
 .page__footer{
+}
+
+
+.page__top{
+	position: fixed;
+	top: var(--header-links-top-offset);
+	right: 0;
+	width: 6rem;
+	transition: all .5s ease;
+	color: black;
+	text-transform: uppercase;
+	z-index: 0;
+	cursor: pointer;
+	z-index: 1;
+	font-size: var(--ms-1);
+	font-weight: normal !important;
+
+	&:after{
+        content: '';
+        display: block;
+        position: absolute;
+        top: 90%;
+        left: 0;
+        right: -2%;
+        height: 1px;
+        width: 100%;
+        background: currentColor;
+        transition: width .5s ease .5s;
+        opacity: .75;
+        margin: 0 auto;
+        margin-top: 0.2em;
+    }
 }
 
 html.js,

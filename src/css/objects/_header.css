@@ -1,5 +1,5 @@
 .header{
-	color: white;
+	color: white
 }
 
 .header__nav{
@@ -16,7 +16,6 @@
 	color: inherit;
 	text-decoration: none;
 	font-size: var(--ms-1);
-
 	transition: opacity .5s ease 1s;
 	opacity: 0;
 

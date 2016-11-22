@@ -11,6 +11,11 @@ h3,
 h4,
 h5,
 .contact,
-.title{
+.title,
+.paragraph{
 	font-family: var(--header-font);
+}
+
+.paragraph{
+	font-size: var(--ms-1);
 }

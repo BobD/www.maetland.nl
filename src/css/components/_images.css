@@ -24,24 +24,91 @@
 
 .images__item{
  	float: left;
- 	padding: .2em;
+ 	padding: .25em;
 }
 
 .images__item img{
   	display: block;
   	max-width: 100%;
+  	min-width: 100%;
+}
+
+.images{
+	
+	/* warm en aards */
+	&:nth-child(1){
+		& li{
+			&:nth-of-type(1){
+				width: 85%;
+			}
+
+			&:nth-of-type(3),
+			&:nth-of-type(4){
+				width: 28%;
+			}
+
+			&:nth-of-type(5){
+				width: 85%;
+			}
+		}
+	}
+	
+	/* licht en naturel */
+	&:nth-child(2){
+		& li{
+			&:nth-of-type(1){
+				width: 100%;
+				& img{
+					max-width: 65%;
+					min-width: 65%;
+					margin: 0 auto;
+				}
+			}
+
+			&:nth-of-type(2){
+				width: 100%;
+
+				& img{
+					max-width: 90%;
+					min-width: 90%;
+				}
+			}
+		}
+	}
+	
+	/* zwart en wit */
+	&:nth-child(3){
+		& li{
+			&:nth-of-type(3){
+				width: 100%;
+			}
+
+			&:nth-of-type(8){
+				width: 75%;
+			}
+
+		}
+	}
 }
 
 @media (--small-viewport) {
 	.images__sizer,
 	.images__item{
-	 	width: 100%;
+	 	width: 100% !important;
+		& img{
+			max-width: 100% !important;
+			min-width: 100% !important;
+		}
 	}
 }
 
 @media (--medium-viewport) {
 	.images__sizer,
 	.images__item{
-	 	width: 50%;
+/*	 	width: 50% !important;
+		& img{
+			max-width: 100% !important;
+			min-width: 100% !important;
+		}*/
 	}
 }

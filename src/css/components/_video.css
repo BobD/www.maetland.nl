@@ -1,4 +1,22 @@
-.easyhtml5video{
+.video{
+	margin-top: -1em;
+	width: 100%;
+	position: relative;
+	@util aspect-ratio(1.77:1);
+
+	& iframe{
+		width: 100% !important;
+		height: 100% !important;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		padding-top: 1em;
+	}
+}
+
+/*.easyhtml5video{
 	max-width: none !important;
 	min-height: 27em;
 
@@ -6,3 +24,4 @@
 		display: none !important
 	}
 }
+*/

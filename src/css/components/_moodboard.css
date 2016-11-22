@@ -150,10 +150,6 @@
 	&.show{
 		opacity: 1;
 	}
-
-/*	&:first-child{
-		visibility: hidden;
-	}*/
 }
 
 .moodboard__info-link{
@@ -276,7 +272,7 @@
 	}
 
 	.moodboard__info-list{
-		margin-top: -2em;
+		margin-top: -4em;
 	}
 
 	.moodboard__item{
@@ -321,6 +317,7 @@
 	
 	.moodboard{
 		& .slick-arrow{
+			margin-top: -.75em;
 			display: block !important;
 		}
 	}

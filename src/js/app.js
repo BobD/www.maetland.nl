@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 			scrollTo(`#${id}`);
 		}else{
 			moodBoard.detail();
-			scrollTo('#content', 1500, 1000);
+			scrollTo('#content', 750, 750);
 		}
 
 		e.preventDefault();

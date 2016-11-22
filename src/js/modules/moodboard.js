@@ -29,7 +29,8 @@ class MoodBoard {
  		 			<use xlink:href="#chevron-right" />
 				</svg></button>`,
 			speed: moveDuration,
-			draggable: false
+			draggable: false,
+			// infinite: false,
 		});
 
 		this.$list.on('beforeChange', (e, slick, currentSlide, nextSlide) => {
@@ -68,6 +69,7 @@ class MoodBoard {
 	}
 
 	onScroll(e){
+
 		if(e.wheelDelta > 0){
 	    	this.prev();
 	    }else{
@@ -115,7 +117,7 @@ class MoodBoard {
 
 	removeDetail(){
 		this.eventEmitter.emit('remove-detail', {});
-		window.addEventListener('mousewheel', this.scrollHandler);
+		this.addScroll();
 	}
 
 	addScroll(){

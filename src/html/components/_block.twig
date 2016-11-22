@@ -1,7 +1,7 @@
 {% set sectionIndex = (index + 1) |default(1) %}
 {% set sectionId = id %}
 
-<div data-js="block" class="block {{modifiers}} block--{{block.type}}">
+<div data-js="block" class="block {{modifiers}} block--{{block.type}} block--{{block.content.attributes.state}}">
 	
 	<header class="block__header">
 		<h{{sectionIndex}} class="block__title">
